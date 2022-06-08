@@ -1,3 +1,5 @@
+Lets go travel after mod 2
+
 # Webpack Starter Kit
 
 ## Clone This Repo
