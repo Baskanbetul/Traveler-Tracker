@@ -4,12 +4,83 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Traveler's dashborad!">
+  <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Lato&family=Permanent+Marker&family=Roboto&display=swap" rel="stylesheet"> -->
   <title>Webpack Starter Kit</title>
 </head>
 <body>
-  <img src="./images/turing-logo.png" alt="turing logo">
-  
+  <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
+
+  <!-- Login page -->
+  <!-- <article class="login-form-container" id="loginFormContainer">
+    <form method="get" action="" class="login-form" id="loginForm">
+      <h1 class="login-header">Login</h1>
+      <section class="group">
+        <input type="text" class="login-input" id="userInput"><span class="bar"></span>
+        <label for="userInput" class="login-label"><i class="far fa-user"></i> Account</label>
+      </section>
+      <section class="group">
+        <input type="password" class="login-input" id="passwordInput"><span class="bar"></span>
+        <label for="passwordInput" class="login-label"><i class="fas fa-key"></i> Password</label>
+      </section>
+      <button type="submit" class="login-button" id="loginButton">Login</button>
+      <p class="warnings" id="warnings"></p>
+    </form>
+  </article> -->
+
+    <main class="traveler-dashboard-view hidden">
+      <header>
+        <section class="agency-logo">
+          <img class="logo-img" src="./images/turing-logo.png" alt="turing logo">
+          <h1>Let's Travel</h1>
+        </section>
+        <section class="agency">
+          <p class="agency-slogan">"It is the traveler only who is foreign!"</p>
+        </section>
+      </header>
+
+        <aside id="travelerInfoSectionView">
+          <h2 id="travelerGreeting"></h2>
+          <h3 id="totalSpentInfo" class="total-spent-info"></h3>
+          <section class="trips-views-btns">
+            <button type="button" id="pastTripBtn" class="past-trips-btn">Past Trips</button>
+            <button type="button" id="upcomingTripBtn" class="upcoming-trips-btn">Upcoming Trips</button>
+            <button type="button" id="pendingTripBtn" class="pending-trips-btn">Pending Trips</button>
+          </section>
+        </aside>
+
+          <article class="trip-form-section">
+            <section class="form-instructions">
+              <h3 class="instructions-header-text">Plan a trip !</h3>
+            </section>
+              <section class="form-fill">
+                <p class="planning-text">Please select a destination and date for your new trip:</p>
+                <p class="post-error-field"></p>
+                <form class="planning-form" method="post">
+                  <div class="form-planning-inputs">
+                    <div class="date-form-section">
+                      <label for="planningDate">Start Date</label>
+                      <input id="planningDate" class="planning-date" type="date" name="start-date" value="" aria-label="Calendar"
+                        required>
+                    </div>
+                      <div class="destination-form-section">
+                        <label for="destinationDropdown">Destination</label>
+                        <select id="destinationDropdown" class="destination-dropdown" name="planning-destination" aria-label="Dropdown List">
+
+
+
+
+
+
+
+
+
+
+
+
   <script src="bundle.js"></script>
 
 </body>
