@@ -5,5 +5,9 @@ class Traveler {
         this.travelerType = traveler.travelerType
         this.trips = []
     }
-    
+    addMatchingTrips(trip) {
+        if (this.id === trip.userID) {
+            this.trips.push(trip)
+        }
+    }
 }
