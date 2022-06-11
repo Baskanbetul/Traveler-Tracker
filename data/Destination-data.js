@@ -77,15 +77,7 @@ destination: "Toronto, Canada",
 estimatedLodgingCostPerDay: 90,
 estimatedFlightCostPerPerson: 450,
 image: "https://images.unsplash.com/photo-1535776142635-8fa180c46af7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2756&q=80"
-},
-{
-id: 11,
-destination: "Mikonos, Greece",
-estimatedLodgingCostPerDay: 140,
-estimatedFlightCostPerPerson: 1000,
-image: "https://images.unsplash.com/photo-1573783309724-e44b859f5a85?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1953&q=80",
-alt: "cityscape along the water during the day"
-},
+}
 ]
 
 export default destinationData;

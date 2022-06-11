@@ -3,7 +3,7 @@ class Trip {
         this.id = tripInfo.id,
         this.userID = tripInfo.userID,
         this.destinationID = tripInfo.destinationID,
-        this.travelers = tripInfo = tripInfo.travelers,
+        this.travelers = tripInfo.travelers,
         this.date = tripInfo.date,
         this.duration = tripInfo.duration,
         this.status = tripInfo.status,
