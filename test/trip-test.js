@@ -1,10 +1,10 @@
 import chai from 'chai';
-const expect = chai.expect;
-import Trips from '../src/trip';
-import tripsData from '../src/data/Trips-data';
+// const expect = chai.expect;
+import Trip from '../src/trip';
+import tripData from '../data/Trip-data';
 
-describe('Trips', functio() {
+// describe('Trips', functio() {
 
 
     
-})
+// })
