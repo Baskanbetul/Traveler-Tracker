@@ -26,18 +26,18 @@ describe('Destination', () => {
     })
 
     it('should have a name', () => {
-        expect(destination1.name).to.equal("Lima, Peru")
-        expect(destination2.name).to.equal('Stockholm, Sweden')
+        expect(destination1.destination).to.equal('Lima, Peru');
+        expect(destination2.destination).to.equal('Stockholm, Sweden');
     })
 
     it('should have an estimated lodging cost per day', () => {
-        expect(destination1.lodging).to.equal(70)
-        expect(destination2.lodging).to.equal(100)
+        expect(destination1.estimatedLodgingCostPerDay).to.equal(70);
+        expect(destination2.estimatedLodgingCostPerDay).to.equal(100);
   })
 
   it('should have an estimated flight cost per person', () => {
-    expect(destination1.flights).to.equal(400)
-    expect(destination2.flights).to.equal(780)
+    expect(destination1.estimatedFlightCostPerPerson).to.equal(400);
+    expect(destination2.estimatedFlightCostPerPerson).to.equal(780);
   })
 
   it('should have an image', () => {
@@ -46,8 +46,9 @@ describe('Destination', () => {
 })
 
   it('should have an alt tag, or a default if there isnt one', () => {
-    expect(destination1.alt).to.equal('white and brown concrete buildings near sea under white clouds during daytime')
-    expect(destination2.alt).to.equal('beautiful travel destination')
+    expect(destination1.alt).to.equal("overview of city buildings with a clear sky")
+    expect(destination2.alt).to.equal("city with boats on the water during the day time")
   })
 
 })
+
