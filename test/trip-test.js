@@ -103,7 +103,7 @@ describe('Trip', () => {
 				userID: 1,
 				destinationID: 1,
 				travelers: 1,
-				date: '2022/09/16',
+				date: '2022/06/12',
 				duration: 8,
 				status: 'approved',
 				suggestedActivities: [],
@@ -181,9 +181,20 @@ describe('Trip', () => {
 
 	it('should get present trip data', () => {
 		let userTrip = trip1.getUserTripData(1);
-		let presentTripsTrips = trip1.getPresentTrips(userTrip);
+		let presentTrips = trip1.getPresentTrips(userTrip);
 
-		expect(presentTrips).to.deep.equal([])
+		expect(presentTrips).to.deep.equal([
+			{
+				id: 1,
+				userID: 1,
+				destinationID: 1,
+				travelers: 1,
+				date: '2022/06/12',
+				duration: 8,
+				status: 'approved',
+				suggestedActivities: [],
+			},
+		]);
 
 })
 })
