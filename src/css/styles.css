@@ -27,7 +27,7 @@ body {
     margin-left: 58%;
 }
 
-aside {
+/* aside {
   border: $border-color 1px;
   border-radius: 5%;
   grid-column-start: 1;
@@ -79,7 +79,7 @@ button {
     transition: 0.2s ease width;
     // width: 110%;
   }
-}
+} */
 
 p {
   margin: 0;
