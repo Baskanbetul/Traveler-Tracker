@@ -1,58 +1,184 @@
-// import chai from 'chai';
-// // const expect = chai.expect;
-// import Trip from '../src/trip';
-// import tripData from '../data/Trip-data';
+import chai from 'chai';
+const expect = chai.expect;
+import Trip from '../src/trip';
+import tripData from '../data/Trip-data';
+import Destination from '../src/destination';
+import destinationData from '../data/Destination-data';
 
-// describe('Trip', () => {
-// 	let trip1;
-// 	let trip2;
+describe('Trip', () => {
+	let trip1;
+	let trip2;
 
-// 	beforeEach(() => {
-// 		trip1 = new Trip(tripData[0]);
-// 		trip2 = new Trip(tripData[1]);
-// 	});
+	beforeEach(() => {
+		trip1 = new Trip(tripData);
+	});
 
-// 	it('should be a function', () => {
-// 		expect(Trip).to.be.a('function');
-// 	});
+	it('should be a function', () => {
+		expect(Trip).to.be.a('function');
+	});
 
-// 	it('should have an id', () => {
-// 		expect(trip1.id).to.equal(1);
-// 		expect(trip2.id).to.equal(2);
-// 	});
+	it('should get user trip data', () => {
+		let userTrip = trip1.getUserTripData(3);
 
-// 	it('should have an user id', () => {
-// 		expect(trip1.userID).to.equal(44);
-// 		expect(trip2.userID).to.equal(35);
-// 	});
+		expect(userTrip).to.deep.equal([
+			{
+				id: 10,
+				userID: 3,
+				destinationID: 11,
+				travelers: 6,
+				date: '2022/07/23',
+				duration: 17,
+				status: 'approved',
+				suggestedActivities: [],
+			},
+		])
+	});
 
-// 	it('should have a destination id', () => {
-// 		expect(trip1.destinationID).to.equal(49);
-// 		expect(trip2.destinationID).to.equal(25);
-// 	});
+		it('should get past trip data', () => {
+		let userTrip = trip1.getUserTripData(1);
+		let pastTrips = trip1.getPastTrips(userTrip,'2022/06/11');
 
-// 	it('should have count of traveleres', () => {
-// 		expect(trip1.travelers).to.equal(1);
-// 		expect(trip2.travelers).to.equal(5);
-// 	});
 
-// 	it('should have a start date', () => {
-// 		expect(trip1.date).to.equal('2022/09/16');
-// 		expect(trip2.date).to.equal('2022/10/04');
-// 	});
+		expect(pastTrips).to.deep.equal([
+			{
+				id: 3,
+				userID: 1,
+				destinationID: 3,
+				travelers: 4,
+				date: '2022/05/22',
+				duration: 17,
+				status: 'approved',
+				suggestedActivities: [],
+			},
+			{
+				id: 4,
+				userID: 1,
+				destinationID: 4,
+				travelers: 2,
+				date: '2022/02/25',
+				duration: 10,
+				status: 'approved',
+				suggestedActivities: [],
+			},
+			{
+				id: 5,
+				userID: 2,
+				destinationID: 5,
+				travelers: 3,
+				date: '2022/04/30',
+				duration: 18,
+				status: 'approved',
+				suggestedActivities: [],
+			},
+			{
+				id: 8,
+				userID: 2,
+				destinationID: 8,
+				travelers: 6,
+				date: '2022/02/07',
+				duration: 4,
+				status: 'approved',
+				suggestedActivities: [],
+			},
+			{
+				id: 71,
+				userID: 38,
+				destinationID: 28,
+				travelers: 1,
+				date: '2020/05/26',
+				duration: 11,
+				status: 'pending',
+				suggestedActivities: [],
+			},
+		]);
+	})
+	
+		it('should get upcoming trip data', () => {
+		let userTrip = trip1.getUserTripData(1);
+		let upcomingTrips = trip1.getUpcomingTrips(userTrip,'2022/06/11');
 
-// 	it('should have duration', () => {
-// 		expect(trip1.duration).to.equal(8);
-// 		expect(trip2.duration).to.equal(18);
-// 	});
+		expect(upcomingTrips).to.deep.equal([
+			{
+				id: 1,
+				userID: 1,
+				destinationID: 1,
+				travelers: 1,
+				date: '2022/09/16',
+				duration: 8,
+				status: 'approved',
+				suggestedActivities: [],
+			},
+			{
+				id: 2,
+				userID: 1,
+				destinationID: 2,
+				travelers: 5,
+				date: '2022/10/04',
+				duration: 18,
+				status: 'approved',
+				suggestedActivities: [],
+			},
+			{
+				id: 6,
+				userID: 2,
+				destinationID: 6,
+				travelers: 3,
+				date: '2022/06/29',
+				duration: 9,
+				status: 'approved',
+				suggestedActivities: [],
+			},
+			{
+				id: 7,
+				userID: 2,
+				destinationID: 7,
+				travelers: 5,
+				date: '2022/5/28',
+				duration: 20,
+				status: 'approved',
+				suggestedActivities: [],
+			},
+			{
+				id: 9,
+				userID: 2,
+				destinationID: 9,
+				travelers: 5,
+				date: '2022/12/19',
+				duration: 19,
+				status: 'approved',
+				suggestedActivities: [],
+			},
+			{
+				id: 10,
+				userID: 3,
+				destinationID: 11,
+				travelers: 6,
+				date: '2022/07/23',
+				duration: 17,
+				status: 'approved',
+				suggestedActivities: [],
+			},
+		]);
+	})
 
-// 	it('should have a status', () => {
-// 		expect(trip1.status).to.equal('approved');
-// 		expect(trip2.status).to.equal('approved');
-// 	});
+	it('should get pending trip data', () => {
+		let userTrip = trip1.getUserTripData(1);
+		let pendingTrips = trip1.getPendingTrips(userTrip);
+	
+		expect(pendingTrips).to.deep.equal([
+			{
+				id: 71,
+				userID: 38,
+				destinationID: 28,
+				travelers: 1,
+				date: '2020/05/26',
+				duration: 11,
+				status: 'pending',
+				suggestedActivities: [],
+			},
+		]);
+	})
 
-// 	it('should start out without suggested activities', () => {
-// 		expect(trip1.suggestedActivities).to.equal([]);
-// 		expect(trip2.suggestedActivities).to.equal([]);
-// 	});
-// });
+
+
+})
