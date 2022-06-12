@@ -3,6 +3,8 @@ class Destination {
 		this.data = destinationData;
 	}
 
+	//maybe destination name method 
+
 	calculateTripsExpenses(duration, travelers, id) {
 
 		let agentFee = 0;
