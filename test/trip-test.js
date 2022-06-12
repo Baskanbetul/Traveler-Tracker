@@ -179,6 +179,11 @@ describe('Trip', () => {
 		]);
 	})
 
+	it('should get present trip data', () => {
+		let userTrip = trip1.getUserTripData(1);
+		let presentTripsTrips = trip1.getPresentTrips(userTrip);
 
+		expect(presentTrips).to.deep.equal([])
 
+})
 })
