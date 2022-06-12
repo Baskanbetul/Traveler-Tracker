@@ -17,7 +17,7 @@ describe('Trip', () => {
 		expect(Trip).to.be.a('function');
 	});
 
-	it('should get user trip data', () => {
+	it('should get user trip data baed on traveler\'s id', () => {
 		let userTrip = trip1.getUserTripData(3);
 
 		expect(userTrip).to.deep.equal([
