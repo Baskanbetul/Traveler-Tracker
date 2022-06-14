@@ -13,28 +13,11 @@ class Traveler {
 		this.pendingTrips = [];
 	}
 	// TURN ON WHEN YOU RUN NPM START!!!
-	
-	// addMatchingTrips(allTrips, allDestinations) {
-	// 	let matchingDestinationTrip = [];
-	// 	allTrips.data.forEach((alltrip) => {
-	// 		allDestinations.data.forEach((allDestination) => {
-	// 			if (alltrip.destinationID === allDestination.id) {
-	// 				alltrip.destination = allDestination;
-	// 				matchingDestinationTrip.push(alltrip);
-	// 			}
-	// 		});
-	// 	});
-	// 	matchingDestinationTrip.forEach((trip) => {
-	// 		if (this.id === trip.userID) {
-	// 			this.trips.push(trip);
-	// 		}
-	// 	});
-	// }
 
 	addMatchingTrips(allTrips, allDestinations) {
 		let matchingDestinationTrip = [];
-		allTrips.forEach((alltrip) => {
-			allDestinations.forEach((allDestination) => {
+		allTrips.data.forEach((alltrip) => {
+			allDestinations.data.forEach((allDestination) => {
 				if (alltrip.destinationID === allDestination.id) {
 					alltrip.destination = allDestination;
 					matchingDestinationTrip.push(alltrip);
@@ -47,6 +30,23 @@ class Traveler {
 			}
 		});
 	}
+
+	// addMatchingTrips(allTrips, allDestinations) {
+	// 	let matchingDestinationTrip = [];
+	// 	allTrips.forEach((alltrip) => {
+	// 		allDestinations.forEach((allDestination) => {
+	// 			if (alltrip.destinationID === allDestination.id) {
+	// 				alltrip.destination = allDestination;
+	// 				matchingDestinationTrip.push(alltrip);
+	// 			}
+	// 		});
+	// 	});
+	// 	matchingDestinationTrip.forEach((trip) => {
+	// 		if (this.id === trip.userID) {
+	// 			this.trips.push(trip);
+	// 		}
+	// 	});
+	// }
 
 	returnFirstName() {
 		return this.name.split(' ')[0];
