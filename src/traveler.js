@@ -13,9 +13,10 @@ class Traveler {
 		this.pendingTrips = [];
 	}
 	addMatchingTrips(allTrips, allDestinations) {
+		console.log('ALL DEST', allDestinations)
 		let matchingDestinationTrip = [];
-		allTrips.forEach((alltrip) => {
-			allDestinations.forEach((allDestination) => {
+		allTrips.data.forEach((alltrip) => {
+			allDestinations.data.forEach((allDestination) => {
 				if (alltrip.destinationID === allDestination.id) {
 					alltrip.destination = allDestination;
 					matchingDestinationTrip.push(alltrip);
@@ -33,39 +34,6 @@ class Traveler {
 		return this.name.split(' ')[0];
 	}
 
-	getPastTrips(currentDay) {
-		// let userTrips = this.getUserTripData(userId);
-		// console.log('TRAVELER TRIPS', this.trips)
-		let pastTrips = this.trips.filter((trip) => {
-			// console.log('TRIP', trip)
-			// console.log('COMPARE', trip.date < currentDay);
-			if (trip.date < currentDay) {
-				return trip;
-			}
-		});
-		// console.log('PAST', pastTrips);
-		this.pastTrips = pastTrips;
-	}
-	
-	getUpcomingTrips(currentDay) {
-		let upcomingTrips = this.trips.filter((trip) => {
-			// console.log(this.trips);
-			if (trip.date > currentDay) {
-				return trip;
-			}
-		});
-		this.upcomingTrips = upcomingTrips;
-		// console.log(this.upcomingTrips);
-	}
-
-	getPendingTrips(userTripData) {
-		let pendingTrips = this.trips.filter((trip) => {
-			if (trip.status === 'pending') {
-				return trip;
-			}
-		});
-		return pendingTrips;
-	}
 	formatDate(day) {
 		var dd = String(day.getDate()).padStart(2, '0');
 		var mm = String(day.getMonth() + 1).padStart(2, '0');
@@ -74,53 +42,53 @@ class Traveler {
 		return formattedDay;
 	}
 
+	getPastTrips() {
+		let date = new Date();
+		let currentDay = this.formatDate(date);
+		let pastTrips = this.trips.filter((trip) => {
+			if (trip.date < currentDay) {
+				return trip;
+			}
+		});
+		this.pastTrips = pastTrips;
+	}
+	
+	
+	getUpcomingTrips() {
+		let date = new Date();
+		let currentDay = this.formatDate(date).split("/");
+		let upcomingTrips = this.trips.filter((trip) => {
+			let splitDate = trip.date.split("/");
+			if ((splitDate[0] >= currentDay[0] && splitDate[1] > currentDay[1]) || (splitDate[0] >= currentDay[0] && splitDate[1] === currentDay[1] && splitDate[2] > currentDay[2])) {
+				return trip;
+			}
+		});
+		this.upcomingTrips = upcomingTrips;
+	}
+
+	getPendingTrips() {
+		let pendingTrips = this.trips.filter((trip) => {
+			if (trip.status === 'pending') {
+				return trip;
+			}
+		});
+		this.pendingTrips = pendingTrips
+		return pendingTrips;
+	}
+	
 	getPresentTrips() {
 		let date = new Date();
 		let formattedDay = this.formatDate(date);
-		// const dates = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
+	
 		let presentTrips = this.trips.filter((trip) => {
 			if (trip.date === formattedDay) {
 				return trip;
 			}
 		});
+		this.presentTrips = presentTrips
 		return presentTrips;
 	}
 }
 
 export default Traveler;
 
-// class Traveler {
-// 	constructor(traveler) {
-// 		this.id = traveler.id;
-// 		this.name = traveler.name;
-// 		this.travelerType = traveler.travelerType;
-// 		this.trips = []; //grab one array for all trip, can push it
-// 	}
-// 	addMatchingTrips(newTrip) {
-// 		// newTrip can be any of past, present, upcoming and pending
-// 		if (this.id === newTrip.userID && !this.trips.includes(newTrip.id)) {
-// 			this.trips.push(newTrip);
-// 		}
-// 	}
-// 	//calculate total amount whole amount
-// 	//butun tripler trip arrayde oradan alip calculate yapmak lazim
-// 	//yil boyunca triplere ne kadar harcadim
-// 	//(estimatedLodgingCostPerDay: 100) + (estimatedFlightCostPerPerson: 780, * person count)tipdata travelers
-// 	// if detination.id === trip id return estimatedFlightCostPerPerson * tripdata traveller
-// 	//calculate for all them
-// 	calculateAllTrips() {
-//         // let total;
-// 		const result = this.trips.reduce((amountAllTrip, trip) => {
-// 			destinationData.forEach(destination => {
-//                 if (destination.id === trip.id) {
-//                 amountAllTrip = (destination.estimatedFlightCostPerPerson * trip.travelers) + destination.estimatedLodgingCostPerDay;
-//                 }
-//             })
-//             // const averagePerYear =
-// 			// 	destination.estimatedFlightCostPerPerson +
-// 			// 	destination.estimatedLodgingCostPerDay;
-// 			return amountAllTrip
-// 		}, 0);
-// 		return result;
-// 	}
-// }

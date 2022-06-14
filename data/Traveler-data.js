@@ -48,6 +48,11 @@ travelerType: "relaxer"
 id: 10,
 name: "Rickie Jodlowski",
 travelerType: "relaxer",
+},
+{
+id: 38,
+name: "Rachel Bee",
+travelerType: "relaxer",
 }
 ]
 

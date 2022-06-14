@@ -95,7 +95,7 @@ const tripData = [
 	{
 		id: 10,
 		userID: 3,
-		destinationID: 11,
+		destinationID: 10,
 		travelers: 6,
 		date: '2022/07/23',
 		duration: 17,
@@ -105,7 +105,7 @@ const tripData = [
 	{
 		id: 71,
 		userID: 38,
-		destinationID: 28,
+		destinationID: 10,
 		travelers: 1,
 		date: '2020/05/26',
 		duration: 11,

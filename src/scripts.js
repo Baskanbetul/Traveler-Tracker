@@ -15,7 +15,7 @@ import { fetchApiData } from './apiCalls.js';
 import Traveler from '../src/traveler';
 import Trip from '../src/trip';
 import Destination from '../src/destination';
-import travelerData from '../data/Traveler-data';
+// import travelerData from '../data/Traveler-data';
 // import travelerData from '../data/Traveler-data'
 
 // ** GLOBAL VARIABLES **
@@ -85,7 +85,7 @@ const destinationPromise = fetchApiData('destinations');
 
 Promise.all([travelerPromise,tripPromise,destinationPromise])
 .then((value) => {
-	// console.log(value[0].travelers);
+	console.log('WHY DATA', value[1].trips);
 	travelerId = getRandomID(value[0].travelers); //that line needs to be random number to make dynamic
 	travelersData = new Traveler(value[0].travelers[4]); //travelerId
 	tripData = new Trip(value[1].trips)

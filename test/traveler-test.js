@@ -9,7 +9,8 @@ import tripData from '../data/Trip-data';
 
 describe('Traveler', () => {
 	let traveler1; //2 tane let veriyoruz ki testincalistiginda n macth oldugundan emin olalim
-	let traveler2;
+  let traveler2;
+  let traveler38;
 	let destination1;
 	let destination2;
 	let trip1;
@@ -19,7 +20,8 @@ describe('Traveler', () => {
 		destination1 = new Destination(destinationData[0]);
 		destination2 = new Destination(destinationData[1]);
 		traveler1 = new Traveler(travelerData[0]);
-		traveler2 = new Traveler(travelerData[1]);
+    traveler2 = new Traveler(travelerData[1]);
+    traveler38 = new Traveler(travelerData[10])
 		trip1 = new Trip(tripData[0]);
 		trip2 = new Trip(tripData[1]);
 	});
@@ -50,126 +52,68 @@ describe('Traveler', () => {
 
 	it('should add trips to travelers trip', () => {
 		traveler1.addMatchingTrips(tripData, destinationData);
-        expect(traveler1.trips.length).to.equal(4);
-        
-        traveler2.addMatchingTrips(tripData, destinationData);
-        expect(traveler2.trips.length).to.equal(5)
+    expect(traveler1.trips.length).to.equal(4);
+    
+    traveler2.addMatchingTrips(tripData, destinationData);
+    expect(traveler2.trips.length).to.equal(5);
+
+    traveler38.addMatchingTrips(tripData, destinationData);
+    expect(traveler38.trips.length).to.equal(1);
 	});
 
-    it('should get past trip data', () => {
-      traveler1.addMatchingTrips(tripData, destinationData);
-      traveler1.getPastTrips('2022/06/11');
-      expect(traveler1.pastTrips.length).to.equal(2);	
-      
-      traveler2.addMatchingTrips(tripData, destinationData);
-      traveler2.getPastTrips('2022/06/11');
-      expect(traveler2.pastTrips.length).to.equal(2);
+  it('should get past trip data', () => {
+    traveler1.addMatchingTrips(tripData, destinationData);
+    traveler1.getPastTrips();
+    expect(traveler1.pastTrips.length).to.equal(2);	
+    
+    traveler2.addMatchingTrips(tripData, destinationData);
+    traveler2.getPastTrips();
+    expect(traveler2.pastTrips.length).to.equal(2);
+
+    traveler38.addMatchingTrips(tripData, destinationData);
+    traveler38.getPastTrips();
+    expect(traveler38.pastTrips.length).to.equal(1);
 	});
 
-	it.only('should get upcoming trip data', () => {
-        traveler1.addMatchingTrips(tripData, destinationData);
-        traveler1.getUpcomingTrips()
-		let userTrip = trip1.getUserTripData(1);
-		let upcomingTrips = trip1.getUpcomingTrips(userTrip, '2022/06/11');
+	it('should get upcoming trip data', () => {
+    traveler1.addMatchingTrips(tripData, destinationData);
+    traveler1.getUpcomingTrips();
+    expect(traveler1.upcomingTrips.length).to.equal(1);
 
-		expect(upcomingTrips).to.deep.equal([
-			{
-				id: 1,
-				userID: 1,
-				destinationID: 1,
-				travelers: 1,
-				date: '2022/06/12',
-				duration: 8,
-				status: 'approved',
-				suggestedActivities: [],
-			},
-			{
-				id: 2,
-				userID: 1,
-				destinationID: 2,
-				travelers: 5,
-				date: '2022/10/04',
-				duration: 18,
-				status: 'approved',
-				suggestedActivities: [],
-			},
-			{
-				id: 6,
-				userID: 2,
-				destinationID: 6,
-				travelers: 3,
-				date: '2022/06/29',
-				duration: 9,
-				status: 'approved',
-				suggestedActivities: [],
-			},
-			{
-				id: 7,
-				userID: 2,
-				destinationID: 7,
-				travelers: 5,
-				date: '2022/5/28',
-				duration: 20,
-				status: 'approved',
-				suggestedActivities: [],
-			},
-			{
-				id: 9,
-				userID: 2,
-				destinationID: 9,
-				travelers: 5,
-				date: '2022/12/19',
-				duration: 19,
-				status: 'approved',
-				suggestedActivities: [],
-			},
-			{
-				id: 10,
-				userID: 3,
-				destinationID: 11,
-				travelers: 6,
-				date: '2022/07/23',
-				duration: 17,
-				status: 'approved',
-				suggestedActivities: [],
-			},
-		]);
+    traveler2.addMatchingTrips(tripData, destinationData);
+    traveler2.getUpcomingTrips();
+    expect(traveler2.upcomingTrips.length).to.equal(3);
+
+    traveler38.addMatchingTrips(tripData, destinationData);
+    traveler38.getUpcomingTrips();
+    expect(traveler38.upcomingTrips.length).to.equal(0);
 	});
 
-	it.skip('should get pending trip data', () => {
-		let userTrip = trip1.getUserTripData(1);
-		let pendingTrips = trip1.getPendingTrips(userTrip);
+	it('should get pending trip data', () => {
+		traveler1.addMatchingTrips(tripData, destinationData);
+		traveler1.getPendingTrips();
+    expect(traveler1.pendingTrips.length).to.equal(0);
+    
+    traveler2.addMatchingTrips(tripData, destinationData);
+    traveler2.getPendingTrips();
+    expect(traveler2.pendingTrips.length).to.equal(0);
 
-		expect(pendingTrips).to.deep.equal([
-			{
-				id: 71,
-				userID: 38,
-				destinationID: 28,
-				travelers: 1,
-				date: '2020/05/26',
-				duration: 11,
-				status: 'pending',
-				suggestedActivities: [],
-			},
-		]);
+    traveler38.addMatchingTrips(tripData, destinationData);
+    traveler38.getPendingTrips();
+    expect(traveler38.pendingTrips.length).to.equal(1);
 	});
 
-	it.skip('should get present trip data', () => {
-		let userTrip = trip1.getUserTripData(1);
-		let presentTrips = trip1.getPresentTrips(userTrip);
+	it('should get present trip data', () => {
+		traveler1.addMatchingTrips(tripData, destinationData);
+		traveler1.getPresentTrips();
+    expect(traveler1.presentTrips.length).to.equal(1);
+    
+    traveler2.addMatchingTrips(tripData, destinationData);
+    traveler2.getPresentTrips();
+    expect(traveler2.presentTrips.length).to.equal(0);
 
-		expect(presentTrips).to.deep.equal([
-			{
-				id: 1,
-				userID: 1,
-				destinationID: 1,
-				travelers: 1,
-				date: '2022/06/12',
-				duration: 8,
-				status: 'approved',
-				suggestedActivities: [],
-			},
-		]);
+    traveler38.addMatchingTrips(tripData, destinationData);
+    traveler38.getPresentTrips();
+    expect(traveler38.presentTrips.length).to.equal(0);
 	});
 });
-// })
