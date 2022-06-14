@@ -32,12 +32,6 @@ let currentDay = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}
 
 // ** QUERY SELECTORS **
 
-// let pastTripButton = document.getElementById('pastTripBtn');
-// let upcomingTripButton = document.getElementById('upcomingTripBtn');
-// let pendingTripButton = document.getElementById('pendingTripBtn');
-// let selectStartDate = document.getElementById('');
-// let selectDays = document.getElementById('');
-
 let clickSubmitButton = document.getElementById('submitFormBtn');
 let planningDate = document.getElementById('planningDate');
 let selectDestination = document.getElementById('destinationDropdown');
@@ -49,7 +43,10 @@ let pastTripsView = document.querySelector('.past-trips-view');
 let upcomingTripsView = document.querySelector('.upcoming-trips-view');
 let pendingTripsView = document.querySelector('.pending-trips-view');
 let totalSpentInfo = document.querySelector('.total-spent-info');
-
+// let planningNoDays = document.querySelector('.planning-no-days');
+// p;
+// planning - no - travelers;
+// destination - dropdown;
 // let trip-destination-name =
 
 
@@ -73,7 +70,8 @@ Promise.all([travelerPromise,tripPromise,destinationPromise])
 .then((value) => {
 	console.log(value[1], "LABELLL74")
 	travelerId = getRandomID(value[0].travelers); //that line needs to be random number to make dynamic
-	travelersData = new Traveler(value[0].travelers[37]); //travelerId
+	travelersData = new Traveler(value[0].travelers[8]); //travelerId
+	console.log(travelersData)
 	tripData = new Trip(value[1].trips)
 	destinationData = new Destination(value[2].destinations);
 	travelersData.addMatchingTrips(tripData, destinationData);
@@ -82,38 +80,50 @@ Promise.all([travelerPromise,tripPromise,destinationPromise])
 	showUserPendingTrips();
 	showTotalSpentInfo();
 })
-// POST REQUEST
-const planATrip = () => {
-	let tripDestination = selectDestination.value //destination input value
-	let matchingDestination = destinationData.data.find(destination => {
-		if (destination.destination === tripDestination) {
-			return destination
-		}
-	})
-	let matchingTrip = tripData.data.find(trip => {
-		if (trip.destinationID === matchingDestination.id) {
-			return trip
-		}
-	})
-	
-	let newTrip = 
-	{
-		"id": tripData.data.length +1,
-		"userID": matchingTrip.userID,
-		"destinationID": matchingTrip.destinationID,
-		"travelers": Number(selectTravelers.value), 
-		"date": planningDate.value.split("-").join("/"),
-		"duration": Number(planningNoDays.value),
-		"status": `pending`,
-		"suggestedActivities":matchingTrip.suggestedActivities
-	}
+
+// ** POST REQUEST **
+
+const planATrip = (event) => {
+	event.preventDefault();
+	// let tripDestination = selectDestination.value //destination input value
+	// let matchingDestination = destinationData.data.find(destination => {
+	// 	if (destination.destination === tripDestination) {
+	// 		return destination
+	// 	}
+	// })
+	// let matchingTrip = tripData.data.find(trip => {
+	// 	if (trip.destinationID === matchingDestination.id) {
+	// 		return trip
+	// 	}
+	// })
+	// console.log(matchingTrip.data.userID, "LABELEELL98");
+	let newTrip = {
+		id: tripData.data.length + 1,
+		userID: 9,
+		destinationID: parseInt(selectDestination.value),
+		// destinationID: Date.now(),
+		travelers: Number(selectTravelers.value),
+		date: planningDate.value.split('-').join('/'),
+		duration: Number(planningNoDays.value),
+		status: `pending`,
+		suggestedActivities: [],
+	};
+	console.log(selectDestination.value, "LABEL102")
 	// console.log(tripData, "LABELELELEL110")
 	//have a post request issue figure out it!
 
 	getEstimatedCost(newTrip.duration, newTrip.travelers, newTrip.id);
 	// click submit button and show me post apidata
-	postApiData(newTrip)
+	postApiData(newTrip).then(response => {
+	tripData.data.push(response.newTrip)
+	travelersData.trips = []
+	travelersData.pendingTrips =[]
+	travelersData.addMatchingTrips(tripData, destinationData)
+	travelersData.getPendingTrips()
 	showUserPendingTrips();
+	
+	});
+	// showUserPendingTrips();
 }
 
 // when I click past trips 
@@ -125,6 +135,7 @@ const showUserPastTrips = () => {
 	travelersData.getPastTrips()
 	travelersData.pastTrips.forEach(trip => {
 		pastTripsView.innerHTML += `
+		<img class="trip-view" src=${trip.destination.image}
 		<h5 class="trip-destination-name">Past Trips destination name: ${trip.destination.destination}</h5>
 		<div class="card-box" id="tripDestinationName">
 		<p class="start-date">Start date:${trip.date}</p>
@@ -145,7 +156,9 @@ const showUserPastTrips = () => {
 const showUserUpcomingTrips = () => {
 	travelersData.getUpcomingTrips()
 	travelersData.upcomingTrips.forEach(trip => {
+		console.log("150")
 		upcomingTripsView.innerHTML += `
+		<img class="trip-view" src=${trip.destination.image}
 		<h5 class="trip-destination-name">Upcoming Trips destination name: ${trip.destination.destination}</h5>
 		<div class="card-box" id="tripDestinationName">
 		<p class="trip-details">Trip Details:</p>
@@ -163,11 +176,13 @@ const showUserUpcomingTrips = () => {
 }
 
 const showUserPendingTrips = () => {
+	pendingTripsView.innerHTML = " "
 	travelersData.getPendingTrips();
-	// console.log(travelersData, "")
+	console.log(travelersData.pendingTrips, "22")
 	travelersData.pendingTrips.forEach((trip) => {
 		// console.log(trip, "LALALAALALA")
 		pendingTripsView.innerHTML += `
+		<img class="trip-view" src=${trip.destination.image}>
 		<h5 class="trip-destination-name">Pending Trips destination name:${trip.destination.destination} </h5>
 		<div class="card-box" id="tripDestinationName">
 		<p class="trip-details">Trip Details:</p>
@@ -192,6 +207,24 @@ const showTotalSpentInfo = () => {
 const getEstimatedCost = (duration, travelers, id) => {
 	let totalCost = destinationData.calculateTripsExpenses(duration, travelers, id);
 	estimatedCost.innerHTML += `Estimated Cost: $ ${totalCost}`
+}
+
+const reloadData = () => {
+
+	// Promise.all([travelerPromise, tripPromise, destinationPromise])
+	// 	.then((value) => {
+	// 		// console.log(value[1], 'LABELLL74')
+	// 		// travelerId = getRandomID(value[0].travelers); //that line needs to be random number to make dynamic
+	// 		travelersData = new Traveler(value[0].travelers[8]); //travelerId
+	// 		tripData = new Trip(value[1].trips);
+	// 		destinationData = new Destination(value[2].destinations);
+	// 		travelersData.addMatchingTrips(tripData, destinationData);
+	// 		travelersData.getPendingTrips()
+	// 		showUserPastTrips();
+	// 		showUserUpcomingTrips();
+	// 		showUserPendingTrips();
+	// 		showTotalSpentInfo();
+		// });
 }
 
 
