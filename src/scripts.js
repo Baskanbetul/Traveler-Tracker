@@ -15,7 +15,7 @@ import { fetchApiData, postApiData } from './apiCalls.js';
 import Traveler from '../src/traveler';
 import Trip from '../src/trip';
 import Destination from '../src/destination';
-import travelerData from '../data/Traveler-data';
+// import travelerData from '../data/Traveler-data';
 // import travelerData from '../data/Traveler-data';
 // import travelerData from '../data/Traveler-data'
 
@@ -85,22 +85,21 @@ Promise.all([travelerPromise,tripPromise,destinationPromise])
 
 const planATrip = (event) => {
 	event.preventDefault();
-	// let tripDestination = selectDestination.value //destination input value
-	// let matchingDestination = destinationData.data.find(destination => {
-	// 	if (destination.destination === tripDestination) {
-	// 		return destination
-	// 	}
-	// })
-	// let matchingTrip = tripData.data.find(trip => {
-	// 	if (trip.destinationID === matchingDestination.id) {
-	// 		return trip
-	// 	}
-	// })
-	// console.log(matchingTrip.data.userID, "LABELEELL98");
+	let tripDestination = selectDestination.value //destination input value
+	let matchingDestination = destinationData.data.find(destination => {
+		if (destination.destination === tripDestination) {
+			return destination
+		}
+	})
+	let matchingTrip = tripData.data.find(trip => {
+		if (trip.destinationID === matchingDestination.id) {
+			return trip
+		}
+	})
 	let newTrip = {
 		id: tripData.data.length + 1,
-		userID: 9,
-		destinationID: parseInt(selectDestination.value),
+		userID: matchingTrip.userID,
+		destinationID: matchingTrip.destinationID,
 		// destinationID: Date.now(),
 		travelers: Number(selectTravelers.value),
 		date: planningDate.value.split('-').join('/'),
@@ -108,26 +107,19 @@ const planATrip = (event) => {
 		status: `pending`,
 		suggestedActivities: [],
 	};
-	console.log(selectDestination.value, "LABEL102")
-	// console.log(tripData, "LABELELELEL110")
-	//have a post request issue figure out it!
-
-	getEstimatedCost(newTrip.duration, newTrip.travelers, newTrip.id);
-	// click submit button and show me post apidata
+	console.log('NEW TRIP', newTrip)
+	getEstimatedCost(newTrip.duration, newTrip.travelers, newTrip.destinationID);
 	postApiData(newTrip).then(response => {
-	tripData.data.push(response.newTrip)
-	travelersData.trips = []
-	travelersData.pendingTrips =[]
-	travelersData.addMatchingTrips(tripData, destinationData)
-	travelersData.getPendingTrips()
-	showUserPendingTrips();
-	
+		console.log('RESPONSE', response.newTrip)
+		tripData.data.push(response.newTrip)
+		travelersData.trips = []
+		// travelersData.pendingTrips =[]
+		travelersData.addMatchingTrips(tripData, destinationData)
+		travelersData.getPendingTrips()
 	});
-	// showUserPendingTrips();
+	showUserPendingTrips();
+	console.log('TRAV DAT', tripData)
 }
-
-// when I click past trips 
-// ilk bilgileri buraya nasil koyabilirim buton olmadan
 
 // ** DISPLAY FUNCTIONS **
 
@@ -149,14 +141,12 @@ const showUserPastTrips = () => {
 		`;
 	})
 	
-	// console.log(travelersData.pastTrips, "93")
 	// travelersData.getPastTrips(currentDay);
 }
 
 const showUserUpcomingTrips = () => {
 	travelersData.getUpcomingTrips()
 	travelersData.upcomingTrips.forEach(trip => {
-		console.log("150")
 		upcomingTripsView.innerHTML += `
 		<img class="trip-view" src=${trip.destination.image}
 		<h5 class="trip-destination-name">Upcoming Trips destination name: ${trip.destination.destination}</h5>
@@ -180,7 +170,6 @@ const showUserPendingTrips = () => {
 	travelersData.getPendingTrips();
 	console.log(travelersData.pendingTrips, "22")
 	travelersData.pendingTrips.forEach((trip) => {
-		// console.log(trip, "LALALAALALA")
 		pendingTripsView.innerHTML += `
 		<img class="trip-view" src=${trip.destination.image}>
 		<h5 class="trip-destination-name">Pending Trips destination name:${trip.destination.destination} </h5>
@@ -199,7 +188,6 @@ const showUserPendingTrips = () => {
 }
 
 const showTotalSpentInfo = () => {
-	// console.log('>>>>>>.', travelersData.trips)
 	let amountSpent = destinationData.calculateTotalTravelExpenses(travelersData.trips);
 	totalSpentInfo.innerHTML = `This year you had spent a total of: $ ${amountSpent}`
 }
@@ -209,23 +197,23 @@ const getEstimatedCost = (duration, travelers, id) => {
 	estimatedCost.innerHTML += `Estimated Cost: $ ${totalCost}`
 }
 
-const reloadData = () => {
+// const reloadData = () => {
 
-	// Promise.all([travelerPromise, tripPromise, destinationPromise])
-	// 	.then((value) => {
-	// 		// console.log(value[1], 'LABELLL74')
-	// 		// travelerId = getRandomID(value[0].travelers); //that line needs to be random number to make dynamic
-	// 		travelersData = new Traveler(value[0].travelers[8]); //travelerId
-	// 		tripData = new Trip(value[1].trips);
-	// 		destinationData = new Destination(value[2].destinations);
-	// 		travelersData.addMatchingTrips(tripData, destinationData);
-	// 		travelersData.getPendingTrips()
-	// 		showUserPastTrips();
-	// 		showUserUpcomingTrips();
-	// 		showUserPendingTrips();
-	// 		showTotalSpentInfo();
-		// });
-}
+// 	// Promise.all([travelerPromise, tripPromise, destinationPromise])
+// 	// 	.then((value) => {
+// 	// 		// console.log(value[1], 'LABELLL74')
+// 	// 		// travelerId = getRandomID(value[0].travelers); //that line needs to be random number to make dynamic
+// 	// 		travelersData = new Traveler(value[0].travelers[8]); //travelerId
+// 	// 		tripData = new Trip(value[1].trips);
+// 	// 		destinationData = new Destination(value[2].destinations);
+// 	// 		travelersData.addMatchingTrips(tripData, destinationData);
+// 	// 		travelersData.getPendingTrips()
+// 	// 		showUserPastTrips();
+// 	// 		showUserUpcomingTrips();
+// 	// 		showUserPendingTrips();
+// 	// 		showTotalSpentInfo();
+// 		// });
+// }
 
 
 // ** EVENT LISTENER **
