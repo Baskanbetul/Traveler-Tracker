@@ -6,15 +6,18 @@ class Destination {
 	//maybe destination name method 
 
 	calculateTripsExpenses(duration, travelers, id) {
+		// console.log(id);
 
 		let agentFee = 0;
-		const userTrip = this.data.filter((destination) => destination.id === id);
+		const userTrip = this.data.filter(destination => destination.id === id);
 		const expenseForTrip = userTrip.reduce((acc, cur) => {
-			acc += cur.estimatedLodgingCostPerDay * duration;
+			// console.log(cur);
+			acc += cur.estimatedLodgingCostPerDay * duration 
 			acc += cur.estimatedFlightCostPerPerson * travelers;
 			return acc;
 		}, 0);
 		agentFee = expenseForTrip * 0.1;
+		// console.log(expenseForTrip + agentFee, "18");
 		return expenseForTrip + agentFee;
 	}
 

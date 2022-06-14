@@ -1,6 +1,15 @@
 function fetchApiData(url) {
-	return fetch(url).then((promise) => promise.json());
+	return fetch(`http://localhost:3001/api/v1/${url}`).then((promise) =>
+		promise.json()
+	);
 };
+
+
+
+// const apiDatas = ['http://localhost:3001/api/v1/travelers',
+//     'http://localhost:3001/api/v1/trips',
+//     'http://localhost:3001/api/v1/destinations']
+
 //first finish get manipulation on dom 
 // function postApiData(newTrip) {
 // 	//postnew trip
@@ -25,6 +34,6 @@ function fetchApiData(url) {
 
 
 //         }
-};
+// };
 
-export { fetchApiData, postApiData };
+export { fetchApiData};
