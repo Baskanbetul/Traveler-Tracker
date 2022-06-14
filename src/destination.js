@@ -3,21 +3,15 @@ class Destination {
 		this.data = destinationData;
 	}
 
-	//maybe destination name method 
-
 	calculateTripsExpenses(duration, travelers, id) {
-		// console.log(id);
-
 		let agentFee = 0;
-		const userTrip = this.data.filter(destination => destination.id === id);
+		const userTrip = this.data.filter((destination) => destination.id === id);
 		const expenseForTrip = userTrip.reduce((acc, cur) => {
-			// console.log(cur);
-			acc += cur.estimatedLodgingCostPerDay * duration 
+			acc += cur.estimatedLodgingCostPerDay * duration;
 			acc += cur.estimatedFlightCostPerPerson * travelers;
 			return acc;
 		}, 0);
 		agentFee = expenseForTrip * 0.1;
-		// console.log(expenseForTrip + agentFee, "18");
 		return expenseForTrip + agentFee;
 	}
 
@@ -31,15 +25,11 @@ class Destination {
 		let agentFee = 1.1;
 		const currentYear = this.getCurrentYear();
 		const expenseForYearlyTrip = tripData.reduce((totalPrice, trip) => {
-			let getdestinations = this.data.forEach((destination) => {
-				if (destination.id === trip.destinationID && trip.date.includes(currentYear)) {
-					totalPrice += destination.estimatedLodgingCostPerDay * trip.duration;
-					totalPrice += destination.estimatedFlightCostPerPerson * trip.travelers;
-				}
-			});
-			return Number((totalPrice * agentFee).toFixed(2));
+			totalPrice += trip.destination.estimatedLodgingCostPerDay * trip.duration;
+			totalPrice += trip.destination.estimatedFlightCostPerPerson * trip.travelers;
+			return totalPrice;
 		}, 0);
-		return expenseForYearlyTrip;
+		return Number((expenseForYearlyTrip * agentFee).toFixed(2));
 	}
 }
 

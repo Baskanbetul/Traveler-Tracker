@@ -15,6 +15,7 @@ import { fetchApiData } from './apiCalls.js';
 import Traveler from '../src/traveler';
 import Trip from '../src/trip';
 import Destination from '../src/destination';
+import travelerData from '../data/Traveler-data';
 // import travelerData from '../data/Traveler-data';
 // import travelerData from '../data/Traveler-data'
 
@@ -42,8 +43,10 @@ let clickSubmit = document.getElementById('submitFormBtn');
 let estimatedCost  = document.getElementById('');
 
 
-let pastTripsViewCard = document.querySelector('.past-trips-view');
-let upcomingTripsViewCard = document.querySelector('.upcoming-trips-view card');
+let pastTripsView = document.querySelector('.past-trips-view');
+let upcomingTripsView = document.querySelector('.upcoming-trips-view');
+let pendingTripsView = document.querySelector('.pending-trips-view');
+let totalSpentInfo = document.querySelector('.total-spent-info');
 
 // let trip-destination-name =
 // ** FUNCTIONS **
@@ -85,9 +88,8 @@ const destinationPromise = fetchApiData('destinations');
 
 Promise.all([travelerPromise,tripPromise,destinationPromise])
 .then((value) => {
-	console.log('WHY DATA', value[1].trips);
 	travelerId = getRandomID(value[0].travelers); //that line needs to be random number to make dynamic
-	travelersData = new Traveler(value[0].travelers[4]); //travelerId
+	travelersData = new Traveler(value[0].travelers[37]); //travelerId
 	tripData = new Trip(value[1].trips)
 	// console.log(value[2].destinations);
 	destinationData = new Destination(value[2].destinations);
@@ -97,6 +99,8 @@ Promise.all([travelerPromise,tripPromise,destinationPromise])
     // console.log(value[2].destinations);
 	showUserPastTrips();
 	showUserUpcomingTrips();
+	showUserPendingTrips();
+	showTotalSpentInfo();
 })
 
 // when I click past trips 
@@ -104,10 +108,10 @@ Promise.all([travelerPromise,tripPromise,destinationPromise])
 
 // display function 
 
-function showUserPastTrips() {
-	travelersData.getPastTrips(currentDay)
+const showUserPastTrips = () => {
+	travelersData.getPastTrips()
 	travelersData.pastTrips.forEach(trip => {
-		pastTripsViewCard.innerHTML += `
+		pastTripsView.innerHTML += `
 		 <h5 class="trip-destination-name">Past Trips destination name: ${trip.destination.destination}</h5>
       <div class="card-box" id="tripDestinationName">
         <p class="start-date">Start date:${trip.date}</p>
@@ -125,24 +129,50 @@ function showUserPastTrips() {
 	// travelersData.getPastTrips(currentDay);
 }
 
-function showUserUpcomingTrips() {
-	travelersData.getUpcomingTrips(currentDay)
+const showUserUpcomingTrips = () => {
+	travelersData.getUpcomingTrips()
+	// console.log('UPCOMING', travelersData.upcomingTrips)
 	travelersData.upcomingTrips.forEach(trip => {
-		// upcomingTripsViewCard.innerHtml += `
-		// <h5 class="trip-destination-name">Upcoming Trips destination name</h5>
-        // <div class="card-box" id="tripDestinationName">
-        //   <p class="trip-details">Trip Details:</p>
-        //   <p class="start-date">Start date:</p>
-        //   <p class="travelers">Travelers:</p>
-        //   <p class="duration">Duration:</p>
-        //   <p class="status">Status:</p>
-        //   <p class="trip-cost">Trip Cost:</p>
-        //   <p class="cost-per-day">Cost Per Day:</p>
-        //   <p class="cost-per-traveler">Cost Per Traveler</p>
-        // </div>
-		// `;
+		upcomingTripsView.innerHTML += `
+		<h5 class="trip-destination-name">Upcoming Trips destination name: ${trip.destination.destination}</h5>
+        <div class="card-box" id="tripDestinationName">
+          <p class="trip-details">Trip Details:</p>
+          <p class="start-date">Start date: ${trip.date}</p>
+          <p class="travelers">Travelers: ${trip.travelers}</p>
+          <p class="duration">Duration: ${trip.duration}</p>
+          <p class="status">Status: ${trip.status}</p>
+          <p class="trip-cost">Trip Cost: ${destinationData.calculateTripsExpenses(trip.duration, trip.travelers, trip.destination.id)}</p>
+          <p class="cost-per-day">Cost Per Day: ${trip.destination.estimatedLodgingCostPerDay}</p>
+          <p class="cost-per-traveler">Cost Per Traveler: ${trip.destination.estimatedFlightCostPerPerson}</p>
+        </div>
+		`;
 	})
 	
 }
 
+const showUserPendingTrips = () => {
+	travelersData.getPendingTrips();
+	// console.log(travelersData, "")
+	travelersData.pendingTrips.forEach((trip) => {
+		// console.log(trip, "LALALAALALA")
+		pendingTripsView.innerHTML += `
+		 <h5 class="trip-destination-name">Pending Trips destination name:${trip.destination.destination} </h5>
+          <div class="card-box" id="tripDestinationName">
+            <p class="trip-details">Trip Details:</p>
+            <p class="start-date">Start date: ${trip.date}</p>
+            <p class="travelers">Travelers: ${trip.travelers}</p>
+            <p class="duration">Duration: ${trip.duration}</p>
+            <p class="status">Status: ${trip.status}</p>
+            <p class="trip-cost">Trip Cost: ${destinationData.calculateTripsExpenses(trip.duration, trip.travelers, trip.destination.id)}</p>
+            <p class="cost-per-day">Cost Per Day: ${trip.destination.estimatedLodgingCostPerDay}</p>
+            <p class="cost-per-traveler">Cost Per Traveler: ${trip.destination.estimatedFlightCostPerPerson}</p>
+          </div>
+		`;
+	});
+}
 
+const showTotalSpentInfo = () => {
+	// console.log('>>>>>>.', travelersData.trips)
+	let amountSpent = destinationData.calculateTotalTravelExpenses(travelersData.trips);
+	totalSpentInfo.innerHTML = `This year you had spent a total of: $ ${amountSpent}`
+}

@@ -7,7 +7,7 @@ const tripData = [
 		userID: 1,
 		destinationID: 1,
 		travelers: 1,
-		date: '2022/06/13',
+		date: '2022/06/14',
 		duration: 8,
 		status: 'approved',
 		suggestedActivities: [],
