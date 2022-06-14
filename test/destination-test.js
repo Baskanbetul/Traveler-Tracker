@@ -3,10 +3,14 @@ import { expect } from 'chai';
 import Destination from '../src/destination';
 import destinationData from '../data/Destination-data';
 import tripData from '../data/Trip-data';
+import travelerData from '../data/Traveler-data';
+import Traveler from '../src/traveler';
 
 describe('Destination', () => {
   let destination;
-  let tripDatas;
+	let tripDatas;
+	let traveler1;
+	let traveler2;
   let userTripData;
 
     // let destination1;
@@ -16,7 +20,9 @@ describe('Destination', () => {
 
     beforeEach(() => {
       destination = new Destination(destinationData);
-      tripDatas = tripData
+			tripDatas = tripData
+			traveler1 = new Traveler(travelerData[0]);
+    	traveler2 = new Traveler(travelerData[1]);
       userTripData = [
 				{
 					id: 1,
@@ -72,9 +78,10 @@ describe('Destination', () => {
       expect(userTrip).to.equal(1056)
     })
 
-    it('should be able to calculate total travel expenses ', () => {
-			const expenseForYearlyTrip = destination.calculateTotalTravelExpenses(userTripData);
-			expect(expenseForYearlyTrip).to.equal(14785.76);
+	it('should be able to calculate total travel expenses ', () => {
+		traveler1.addMatchingTrips(tripData, destinationData);
+			const expenseForYearlyTrip = destination.calculateTotalTravelExpenses(traveler1.trips);
+			expect(expenseForYearlyTrip).to.equal(15422.00);
 		});
   })
 

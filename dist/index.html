@@ -6,10 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Traveler's dashborad!">
-  <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Lato&family=Permanent+Marker&family=Roboto&display=swap" rel="stylesheet"> -->
-  <title>Webpack Starter Kit</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Handlee&family=Lato&family=Permanent+Marker&family=Roboto&display=swap"
+    rel="stylesheet">
+  <title>TravelTracker</title>
 </head>
 
 <body>
@@ -18,110 +20,108 @@
 
   <!-- Login page -->
   <!-- <article class="login-form-container" id="loginFormContainer">
-    <form method="get" action="" class="login-form" id="loginForm">
-      <h1 class="login-header">Login</h1>
-      <section class="group">
-        <input type="text" class="login-input" id="userInput"><span class="bar"></span>
-        <label for="userInput" class="login-label"><i class="far fa-user"></i> Account</label>
-      </section>
-      <section class="group">
-        <input type="password" class="login-input" id="passwordInput"><span class="bar"></span>
-        <label for="passwordInput" class="login-label"><i class="fas fa-key"></i> Password</label>
-      </section>
-      <button type="submit" class="login-button" id="loginButton">Login</button>
-      <p class="warnings" id="warnings"></p>
-    </form>
-  </article> -->
+      <form method="get" action="" class="login-form" id="loginForm">
+        <h1 class="login-header">Login</h1>
+        <section class="group">
+          <input type="text" class="login-input" id="userInput"><span class="bar"></span>
+          <label for="userInput" class="login-label"><i class="far fa-user"></i> Account</label>
+        </section>
+        <section class="group">
+          <input type="password" class="login-input" id="passwordInput"><span class="bar"></span>
+          <label for="passwordInput" class="login-label"><i class="fas fa-key"></i> Password</label>
+        </section>
+        <button type="submit" class="login-button" id="loginButton">Login</button>
+        <p class="warnings" id="warnings"></p>
+      </form>
+    </article> -->
 
-  <main class="traveler-dashboard-view hidden">
-    <header>
-      <section class="agency-logo">
-        <!-- <img class="logo-img" src="./images/turing-logo.png" alt="turing logo"> -->
-        <h1>"It is the traveler only who is foreign!"</h1>
-      </section>
-      <!-- <section class="agency"> -->
-        <!-- <p class="agency-slogan">"It is the traveler only who is foreign!"</p> -->
-      <!-- </section> -->
-    </header>
 
-    <aside id="travelerInfoSectionView">
-      <h2 id="travelerGreeting"></h2>
-      <h3 id="totalSpentInfo" class="total-spent-info"></h3>
-      <section class="trips-views-btns">
-        <button type="button" id="pastTripBtn" class="past-trips-btn">Past Trips</button>
-        <button type="button" id="upcomingTripBtn" class="upcoming-trips-btn">Upcoming Trips</button>
-        <button type="button" id="pendingTripBtn" class="pending-trips-btn">Pending Trips</button>
-      </section>
-    </aside>
+  <!-- <main class="traveler-dashboard-view hidden"> -->
+  <header>
+    <section class="agency-logo">
+      <!-- <img class="logo-img" src="./images/turing-logo.png" alt="turing logo"> -->
+      <h1>Travel Time</h1>
+    </section>
+    <section class="agency">
+      <p class="agency-slogan">"It is the traveler only who is foreign!"</p>
+    </section>
+  </header>
+  <nav>
+    <div class="grid-card">
+      <div class="traveler-info-section-view" id="travelerInfoSectionView">
+        <h2 id="travelerGreeting">Ready for new adventure!</h2>
+        <h3 id="totalSpentInfo" class="total-spent-info"></h3>
+        <section class="trips-views-btns">
+          <button type="button" id="pastTripBtn" class="past-trips-btn">Past Trips</button>
+          <button type="button" id="upcomingTripBtn" class="upcoming-trips-btn">Upcoming Trips</button>
+          <button type="button" id="pendingTripBtn" class="pending-trips-btn">Pending Trips</button>
+        </section>
+      </div>
+      <div class="trip-form-section">
+        <section class="form-instructions">
+          <h3 class="instructions-header-text">Plan a trip !</h3>
+        </section>
+        <section class="form-fill">
+          <p class="planning-text">Please select a destination and date for your new trip:</p>
+          <p class="post-error-field"></p>
+          <form class="planning-form" method="post">
+            <div class="form-planning-inputs">
+              <div class="date-form-section">
+                <label for="planningDate">Start Date</label>
+                <input id="planningDate" class="planning-date" type="date" name="start-date" value=""
+                  aria-label="Calendar" required>
+              </div>
+              <div class="destination-form-section">
+                <label for="destinationDropdown">Destination</label>
+                <select id="destinationDropdown" class="destination-dropdown" name="planning-destination"
+                  aria-label="Dropdown List">
+                  <option value="Lima, Peru">Lima, Peru</option>
+                  <option value="Stockholm, Sweden">Stockholm, Sweden</option>
+                  <option value="Sydney, Austrailia">Sydney, Austrailia</option>
+                  <option value="Cartagena, Colombia">Cartagena, Colombia</option>
+                  <option value="Madrid, Spain">Madrid, Spain</option>
+                </select>
+              </div>
+              <div class="days-form-section">
+                <label for="planningNoDays">Days</label>
+                <input type="number" id="planningNoDays" class="planning-no-days" name="planning-duration"
+                  placeholder="How many ?" aria-label="Number of days" required></input>
+              </div>
+              <div class="persons-form-section">
+                <label for="planningNoTravelers">Travelers</label>
+                <input type="number" id="planningNoTravelers" class="planning-no-travelers" name="planning-travelers"
+                  placeholder="How many ?" aria-label="Number of Travelers" required></input>
+              </div>
+              <div class="planning-bottom">
+                <p></p>
+                <button id="submitFormBtn" class="submit-form-btn" form="planning-form" type="button"
+                  name="button">Submit</button>
+              </div>
+            </div>
+          </form>
+          <h4 id="planningCost" class="planning-cost">Estimated Cost: $ 0.00</h4>
+        </section>
+      </div>
+    </div>
+  </nav>
 
-    <article class="trip-form-section">
-      <section class="form-instructions">
-        <h3 class="instructions-header-text">Plan a trip !</h3>
-      </section>
-      <section class="form-fill">
-        <p class="planning-text">Please select a destination and date for your new trip:</p>
-        <p class="post-error-field"></p>
-        <form class="planning-form" method="post">
-          <div class="form-planning-inputs">
-            <div class="date-form-section">
-              <label for="planningDate">Start Date</label>
-              <input id="planningDate" class="planning-date" type="date" name="start-date" value=""
-                aria-label="Calendar" required>
-            </div>
-            <div class="destination-form-section">
-              <label for="destinationDropdown">Destination</label>
-              <select id="destinationDropdown" class="destination-dropdown" name="planning-destination"
-                aria-label="Dropdown List">
-                <option value="Lima, Peru">Lima, Peru</option>
-                <option value="Stockholm, Sweden">Stockholm, Sweden</option>
-                <option value="Sydney, Austrailia">Sydney, Austrailia</option>
-                <option value="Cartagena, Colombia">Cartagena, Colombia</option>
-                <option value="Madrid, Spain">Madrid, Spain</option>
-                <!-- ican add more destination don t forget turkey w images  -->
-              </select>
-            </div>
-            <div class="days-form-section">
-              <label for="planningNoDays">Days</label>
-              <input type="number" id="planningNoDays" class="planning-no-days" name="planning-duration"
-                placeholder="How many ?" aria-label="Number of days" required></input>
-            </div>
-            <div class="persons-form-section">
-              <label for="planningNoTravelers">Travelers</label>
-              <input type="number" id="planningNoTravelers" class="planning-no-travelers" name="planning-travelers"
-                placeholder="How many ?" aria-label="Number of Travelers" required></input>
-            </div>
-            <div class="planning-bottom">
-              <p></p>
-              <button id="submitFormBtn" class="submit-form-btn" form="planning-form" type="button"
-                name="button">Submit</button>
-            </div>
-          </div>
-        </form>
-        <h4 id="planningCost" class="planning-cost">Estimated Cost: $ 0.00</h4>
-      </section>
-    </article>
 
-    <article id="tripsViewInfoSection" class="trips-view-info-section">
-      <section id="pastTripsView" class="past-trips-view">
-      </section>
-      <section id="upcomingTripsView" class="upcoming-trips-view hidden">
-      </section>
-      <section id="pendingTripsView" class="pending-trips-view hidden">
-      </section>
-    </article>
+  <main>
+    <div class="past-trips-view card">
+     
+    </div>
+
+      <div class="upcoming-trips-view card">
+        
+      </div>
+
+        <div class="pending-trips-view card">
+         
+        </div>
+   
   </main>
-
-
-
-
-
-
-
-
-
   <script src="bundle.js"></script>
-  <!-- <script src="https://kit.fontawesome.com/af04af5187.js" crossorigin="anonymous"></script> -->
-
+  <script src="https://kit.fontawesome.com/af04af5187.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
