@@ -71,6 +71,7 @@ const destinationPromise = fetchApiData('destinations');
 
 Promise.all([travelerPromise,tripPromise,destinationPromise])
 .then((value) => {
+	console.log(value[1], "LABELLL74")
 	travelerId = getRandomID(value[0].travelers); //that line needs to be random number to make dynamic
 	travelersData = new Traveler(value[0].travelers[37]); //travelerId
 	tripData = new Trip(value[1].trips)
@@ -94,23 +95,25 @@ const planATrip = () => {
 			return trip
 		}
 	})
-
+	
 	let newTrip = 
 	{
-		"id": `${matchingTrip.id}`,
-		"userID": `${matchingTrip.userID}`,
-		"destinationID": `${matchingTrip.destinationID}`,
-		"travelers": `${Number(selectTravelers.value)}`, 
-		"date": `${planningDate.value}`,
-		"duration": `${Number(planningNoDays.value)}`,
+		"id": tripData.data.length +1,
+		"userID": matchingTrip.userID,
+		"destinationID": matchingTrip.destinationID,
+		"travelers": Number(selectTravelers.value), 
+		"date": planningDate.value.split("-").join("/"),
+		"duration": Number(planningNoDays.value),
 		"status": `pending`,
-		"suggestedActivities": `${matchingTrip.suggestedActivities}`
+		"suggestedActivities":matchingTrip.suggestedActivities
 	}
+	// console.log(tripData, "LABELELELEL110")
 	//have a post request issue figure out it!
 
 	getEstimatedCost(newTrip.duration, newTrip.travelers, newTrip.id);
 	// click submit button and show me post apidata
 	postApiData(newTrip)
+	showUserPendingTrips();
 }
 
 // when I click past trips 
