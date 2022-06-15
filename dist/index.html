@@ -19,14 +19,14 @@
     <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
     <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
     <header>
-      <img class="logo-img" src="./images/pngegg.png" alt="travel logo">
-      <h1>Travel Time</h1>
+      <img class="logo-img" src="./images/pngegg.png" alt="travel logo" tabindex="0">
+      <h1 tabindex="0">Travel Time</h1>
       <section class="agency">
-        <p class="agency-slogan">"It is the traveler only who is foreign!"</p>
+        <p tabindex="0" class="agency-slogan">"It is the traveler only who is foreign!"</p>
       </section>
     </header>
-    <form method="get" action="" class="login-form" id="loginForm">
-      <h2 class="login-header">Login</h2>
+    <form method="get" action="" class="login-form hidden" id="loginForm">
+      <h2 class="login-header" tabindex="0">Login</h2>
       <section class="group">
         <input type="text" name="username" class="login-input" id="userInput"><span class="bar"></span>
         <label for="userInput" class="login-label"><i class="far fa-user"></i> Account</label>
@@ -38,30 +38,30 @@
       <button type="button" class="login-button" id="loginButton">Login</button>
       <p class="warnings hidden" id="warnings">Please enter correct user name and password</p>
     </form>
-    <section class="dashboard-view hidden">
+    <section class="dashboard-view">
       <article class="grid-card">
         <div class="traveler-info-section-view" id="travelerInfoSectionView">
-          <h2 id="travelerGreeting">Ready for new adventure!</h2>
-          <h2 id="networkError"></h2>
-          <p class="welcome">Welcome Rachel!</p>
+          <h2 id="travelerGreeting" tabindex="0">Ready for new adventure!</h2>
+          <h2 class="error" id="networkError"></h2>
+          <p class="welcome" tabindex="0">Welcome Rachel!</p>
           <h3 id="totalSpentInfo" class="total-spent-info"></h3>
         </div>
         <article class="trip-form-section">
           <section class="form-instructions">
-            <h3 class="instructions-header-text">Plan a trip !</h3>
+            <h3 class="instructions-header-text" tabindex="0">Plan a trip !</h3>
           </section>
           <section class="form-fill">
-            <p class="planning-text">Please select a destination and date for your new trip:</p>
+            <p class="planning-text" tabindex="0">Please select a destination and date for your new trip:</p>
             <p class="post-error-field hidden"></p>
             <form class="planning-form" method="post">
-              <div class="form-planning-inputs">
-                <div class="date-form-section">
+              <div class="form-planning-inputs" tabindex="0">
+                <div class="date-form-section" tabindex="0">
                   <label for="planningDate">Start Date</label>
                   <input id="planningDate" class="planning-date" type="date" name="start-date" value=""
                     aria-label="Calendar" required>
                 </div>
-                <form class="destination-form-section">
-                  <label for="destinationDropdown">Destination</label>
+                <form class="destination-form-section" tabindex="0">
+                  <label for="destinationDropdown" tabindex="0">Destination</label>
                   <select id="destinationDropdown" class="destination-dropdown" name="planning-destination"
                     aria-label="Dropdown List">
                     <option>Lima, Peru</option>
@@ -115,12 +115,12 @@
                   </select>
                 </form>
                 <div class="days-form-section">
-                  <label for="planningNoDays">Days</label>
+                  <label for="planningNoDays" tabindex="0">Days</label>
                   <input type="number" id="planningNoDays" class="planning-no-days" name="planning-duration"
                     placeholder="How many ?" aria-label="Number of days" required></input>
                 </div>
                 <div class="persons-form-section">
-                  <label for="planningNoTravelers">Travelers</label>
+                  <label for="planningNoTravelers" tabindex="0">Travelers</label>
                   <input type="number" id="planningNoTravelers" class="planning-no-travelers" name="planning-travelers"
                     placeholder="How many ?" aria-label="Number of Travelers" required></input>
                 </div>
@@ -130,15 +130,15 @@
                 </div>
               </div>
             </form>
-            <h4 id="planningCost" class="planning-cost"></h4>
+            <h4 id="planningCost" class="planning-cost error"></h4>
           </section>
         </article>
       </article>
     </section>
-    <section class="all-trips-view hidden">
-      <div class="past-trips-view card"></div>
-      <div class="upcoming-trips-view card"></div>
-      <div class="pending-trips-view card"> </div>
+    <section class="all-trips-view">
+      <div class="past-trips-view card" tabindex="0"></div>
+      <div class="upcoming-trips-view card" tabindex="0"></div>
+      <div class="pending-trips-view card" tabindex="0"> </div>
     </section>
   </main>
   <script src="bundle.js"></script>
