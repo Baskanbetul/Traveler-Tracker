@@ -7,17 +7,12 @@
 // // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 // import './images/turing-logo.png'
 
-
-// console.log('This is the JavaScript entry file - your code begins here.');
-
 import './css/styles.css';
 import { fetchApiData, postApiData } from './apiCalls.js';
 import Traveler from '../src/traveler';
 import Trip from '../src/trip';
 import Destination from '../src/destination';
 // import travelerData from '../data/Traveler-data';
-// import travelerData from '../data/Traveler-data';
-// import travelerData from '../data/Traveler-data'
 
 // ** GLOBAL VARIABLES **
 
@@ -26,8 +21,8 @@ let travelersData;
 let tripData;
 let currentTraveler;
 let travelerId;
-let date = new Date()
-let currentDay = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
+let date = new Date();
+let currentDay = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
 
 
 // ** QUERY SELECTORS **
@@ -43,11 +38,6 @@ let pastTripsView = document.querySelector('.past-trips-view');
 let upcomingTripsView = document.querySelector('.upcoming-trips-view');
 let pendingTripsView = document.querySelector('.pending-trips-view');
 let totalSpentInfo = document.querySelector('.total-spent-info');
-// let planningNoDays = document.querySelector('.planning-no-days');
-// p;
-// planning - no - travelers;
-// destination - dropdown;
-// let trip-destination-name =
 
 
 // ** FUNCTIONS **
@@ -57,8 +47,6 @@ const getRandomID = (parameter) => {
 };
 
 currentTraveler = getRandomID();
-// console.log(currentTraveler)
-//that should return random id 
 
 // ** FETCH REQUEST **
 
@@ -68,11 +56,9 @@ const destinationPromise = fetchApiData('destinations');
 
 Promise.all([travelerPromise,tripPromise,destinationPromise])
 .then((value) => {
-	console.log(value[1], "LABELLL74")
 	travelerId = getRandomID(value[0].travelers); //that line needs to be random number to make dynamic
 	travelersData = new Traveler(value[0].travelers[8]); //travelerId
-	console.log(travelersData)
-	tripData = new Trip(value[1].trips)
+	tripData = new Trip(value[1].trips);
 	destinationData = new Destination(value[2].destinations);
 	travelersData.addMatchingTrips(tripData, destinationData);
 	showUserPastTrips();
@@ -96,29 +82,28 @@ const planATrip = (event) => {
 			return trip
 		}
 	})
+	
 	let newTrip = {
 		id: tripData.data.length + 1,
-		userID: matchingTrip.userID,
+		userID: travelersData.id,
 		destinationID: matchingTrip.destinationID,
-		// destinationID: Date.now(),
 		travelers: Number(selectTravelers.value),
 		date: planningDate.value.split('-').join('/'),
 		duration: Number(planningNoDays.value),
 		status: `pending`,
 		suggestedActivities: [],
 	};
-	console.log('NEW TRIP', newTrip)
-	getEstimatedCost(newTrip.duration, newTrip.travelers, newTrip.destinationID);
+	
+	
 	postApiData(newTrip).then(response => {
-		console.log('RESPONSE', response.newTrip)
 		tripData.data.push(response.newTrip)
 		travelersData.trips = []
-		// travelersData.pendingTrips =[]
+		travelersData.pendingTrips =[]
 		travelersData.addMatchingTrips(tripData, destinationData)
-		travelersData.getPendingTrips()
+		// travelersData.getPendingTrips()
+		showUserPendingTrips();
 	});
-	showUserPendingTrips();
-	console.log('TRAV DAT', tripData)
+	getEstimatedCost(newTrip.duration, newTrip.travelers, newTrip.destinationID);
 }
 
 // ** DISPLAY FUNCTIONS **
@@ -168,7 +153,6 @@ const showUserUpcomingTrips = () => {
 const showUserPendingTrips = () => {
 	pendingTripsView.innerHTML = " "
 	travelersData.getPendingTrips();
-	console.log(travelersData.pendingTrips, "22")
 	travelersData.pendingTrips.forEach((trip) => {
 		pendingTripsView.innerHTML += `
 		<img class="trip-view" src=${trip.destination.image}>
@@ -194,27 +178,8 @@ const showTotalSpentInfo = () => {
 
 const getEstimatedCost = (duration, travelers, id) => {
 	let totalCost = destinationData.calculateTripsExpenses(duration, travelers, id);
-	estimatedCost.innerHTML += `Estimated Cost: $ ${totalCost}`
+	estimatedCost.innerHTML = `Estimated Cost: $ ${totalCost}`
 }
-
-// const reloadData = () => {
-
-// 	// Promise.all([travelerPromise, tripPromise, destinationPromise])
-// 	// 	.then((value) => {
-// 	// 		// console.log(value[1], 'LABELLL74')
-// 	// 		// travelerId = getRandomID(value[0].travelers); //that line needs to be random number to make dynamic
-// 	// 		travelersData = new Traveler(value[0].travelers[8]); //travelerId
-// 	// 		tripData = new Trip(value[1].trips);
-// 	// 		destinationData = new Destination(value[2].destinations);
-// 	// 		travelersData.addMatchingTrips(tripData, destinationData);
-// 	// 		travelersData.getPendingTrips()
-// 	// 		showUserPastTrips();
-// 	// 		showUserUpcomingTrips();
-// 	// 		showUserPendingTrips();
-// 	// 		showTotalSpentInfo();
-// 		// });
-// }
-
 
 // ** EVENT LISTENER **
 

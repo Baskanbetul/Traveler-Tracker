@@ -91,7 +91,6 @@ class Traveler {
 			}
 		});
 		this.pendingTrips = pendingTrips
-		console.log('TRAV PEND', pendingTrips)
 		return pendingTrips;
 	}
 	
