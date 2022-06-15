@@ -26,32 +26,33 @@ let clickLogInButton = document.getElementById('loginButton');
 
 // ** FUNCTIONS **
 
-const logIn = () => {
-	let userName = userInput.value.split('');
-	let id = userName.slice(8).join('');
-	let password = passwordInput.value
-	if (userInput.value === '' || password === '' || password !== 'traveler') {
-		domUpdates.displayLogInError();
-	} else {
-			domUpdates.hideLogInError();
-			travelerId = Number(id) 
-			domUpdates.hideLogInPage();
-			domUpdates.showAllTrips();
-			domUpdates.showDashboard();
-			getAllData();
-		}
-	}
+// const logIn = () => {
+// 	let userName = userInput.value.split('');
+// 	let id = userName.slice(8).join('');
+// 	let password = passwordInput.value
+// 	if (userInput.value === '' || password === '' || password !== 'traveler') {
+// 		domUpdates.displayLogInError();
+// 	} else {
+// 			domUpdates.hideLogInError();
+// 			travelerId = Number(id) 
+// 			domUpdates.hideLogInPage();
+// 			domUpdates.showAllTrips();
+// 			domUpdates.showDashboard();
+// 			getAllData();
+// 		}
+// 	}
 
 
 // ** FETCH  GET REQUEST **
 
-const getAllData = () => {
+// const getAllData = () => {
 	const travelerPromise = fetchApiData('travelers');
 	const tripPromise = fetchApiData('trips');
 	const destinationPromise = fetchApiData('destinations');
 	
 	Promise.all([travelerPromise,tripPromise,destinationPromise])
 		.then((value) => {
+			travelerId = 20
 		let oneTraveler = value[0].travelers.find(traveler => traveler.id === travelerId)
 		travelersData = new Traveler(oneTraveler);
 		tripData = new Trip(value[1].trips);
@@ -63,7 +64,7 @@ const getAllData = () => {
 		showTotalSpentInfo();
 		domUpdates.displayTravelerName(travelersData); 
 	})
-}
+// }
 
 // ** POST REQUEST **
 

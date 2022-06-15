@@ -30,6 +30,10 @@ header {
   margin-left: 50px;
 }
 
+.error {
+  color: transparent;
+}
+
 .login-form {
   display: flex;
   flex-direction: column;

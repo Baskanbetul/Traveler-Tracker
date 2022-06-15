@@ -14,54 +14,59 @@ let logInWarning = document.getElementById('warnings');
 // let networkError = document.getElementById('networkError');
 
 let domUpdates = {
-
 	displayUserPastTrip(trip, destinationData) {
-    	pastTripsView.innerHTML += `
-		<img class="trip-view" src=${trip.destination.image}
-		<h5 class="trip-destination-name">Past Trips destination name: ${trip.destination.destination}</h5>
-		<div class="card-box" id="tripDestinationName">
-		<p class="start-date">Start date:${trip.date}</p>
-		<p class="travelers">Travelers:${trip.travelers}</p>
-		<p class="duration">Duration:${trip.duration}</p>
-		<p class="status">Status:${trip.status}</p>
-		<p class="trip-cost">Trip Cost: ${destinationData.calculateTripsExpenses(trip.duration, trip.travelers, trip.destination.id)}</p>
-		<p class="cost-per-day">Cost Per Day: ${trip.destination.estimatedLodgingCostPerDay}</p>
-		<p class="cost-per-traveler">Cost Per Traveler: ${trip.destination.estimatedFlightCostPerPerson}</p>
-		</div>
+    pastTripsView.innerHTML += `
+      <article tabindex="0">
+        <img class="trip-view" src=${trip.destination.image} alt=${trip.destination.alt}>
+        <h5 class="trip-destination-name">Past Trips destination name: ${trip.destination.destination}</h5>
+        <div class="card-box" id="tripDestinationName">
+        <p class="start-date">Start date:${trip.date}</p>
+        <p class="travelers">Travelers:${trip.travelers}</p>
+        <p class="duration">Duration:${trip.duration}</p>
+        <p class="status">Status:${trip.status}</p>
+        <p class="trip-cost">Trip Cost: ${destinationData.calculateTripsExpenses(trip.duration, trip.travelers, trip.destination.id)}</p>
+        <p class="cost-per-day">Cost Per Day: ${trip.destination.estimatedLodgingCostPerDay}</p>
+        <p class="cost-per-traveler">Cost Per Traveler: ${trip.destination.estimatedFlightCostPerPerson}</p>
+        </div>
+      </article>
 		`;
   },
 
   displayUserUpcomingTrips(trip, destinationData) {
-    	upcomingTripsView.innerHTML += `
-		<img class="trip-view" src=${trip.destination.image}
-		<h5 class="trip-destination-name">Upcoming Trips destination name: ${trip.destination.destination}</h5>
-		<div class="card-box" id="tripDestinationName">
-		<p class="trip-details">Trip Details:</p>
-		<p class="start-date">Start date: ${trip.date}</p>
-		<p class="travelers">Travelers: ${trip.travelers}</p>
-		<p class="duration">Duration: ${trip.duration}</p>
-		<p class="status">Status: ${trip.status}</p>
-		<p class="trip-cost">Trip Cost: ${destinationData.calculateTripsExpenses(trip.duration, trip.travelers, trip.destination.id)}</p>
-		<p class="cost-per-day">Cost Per Day: ${trip.destination.estimatedLodgingCostPerDay}</p>
-		<p class="cost-per-traveler">Cost Per Traveler: ${trip.destination.estimatedFlightCostPerPerson}</p>
-		</div>
+    upcomingTripsView.innerHTML += `
+      <article tabindex="0">
+        <img class="trip-view" src=${trip.destination.image} alt=${trip.destination.alt}>
+        <h5 class="trip-destination-name">Upcoming Trips destination name: ${trip.destination.destination}</h5>
+        <div class="card-box" id="tripDestinationName">
+        <p class="trip-details">Trip Details:</p>
+        <p class="start-date">Start date: ${trip.date}</p>
+        <p class="travelers">Travelers: ${trip.travelers}</p>
+        <p class="duration">Duration: ${trip.duration}</p>
+        <p class="status">Status: ${trip.status}</p>
+        <p class="trip-cost">Trip Cost: ${destinationData.calculateTripsExpenses(trip.duration, trip.travelers, trip.destination.id)}</p>
+        <p class="cost-per-day">Cost Per Day: ${trip.destination.estimatedLodgingCostPerDay}</p>
+        <p class="cost-per-traveler">Cost Per Traveler: ${trip.destination.estimatedFlightCostPerPerson}</p>
+        </div>
+      </article>
 		`;
   },
 
   displayUserPendingTrips(trip, destinationData) {
-    	pendingTripsView.innerHTML += `
-		<img class="trip-view" src=${trip.destination.image}>
-		<h5 class="trip-destination-name">Pending Trips destination name:${trip.destination.destination} </h5>
-		<div class="card-box" id="tripDestinationName">
-		<p class="trip-details">Trip Details:</p>
-		<p class="start-date">Start date: ${trip.date}</p>
-		<p class="travelers">Travelers: ${trip.travelers}</p>
-		<p class="duration">Duration: ${trip.duration}</p>
-		<p class="status">Status: ${trip.status}</p>
-		<p class="trip-cost">Trip Cost: ${destinationData.calculateTripsExpenses(trip.duration, trip.travelers, trip.destination.id)}</p>
-		<p class="cost-per-day">Cost Per Day: ${trip.destination.estimatedLodgingCostPerDay}</p>
-		<p class="cost-per-traveler">Cost Per Traveler: ${trip.destination.estimatedFlightCostPerPerson}</p>
-		</div>
+    pendingTripsView.innerHTML += `
+    <article tabindex="0">
+      <img class="trip-view" src=${trip.destination.image} alt=${trip.destination.alt}>
+      <h5 class="trip-destination-name">Pending Trips destination name:${trip.destination.destination} </h5>
+      <div class="card-box" id="tripDestinationName">
+      <p class="trip-details">Trip Details:</p>
+      <p class="start-date">Start date: ${trip.date}</p>
+      <p class="travelers">Travelers: ${trip.travelers}</p>
+      <p class="duration">Duration: ${trip.duration}</p>
+      <p class="status">Status: ${trip.status}</p>
+      <p class="trip-cost">Trip Cost: ${destinationData.calculateTripsExpenses(trip.duration, trip.travelers, trip.destination.id)}</p>
+      <p class="cost-per-day">Cost Per Day: ${trip.destination.estimatedLodgingCostPerDay}</p>
+      <p class="cost-per-traveler">Cost Per Traveler: ${trip.destination.estimatedFlightCostPerPerson}</p>
+      </div>
+    </article>
 		`;
   },
 
