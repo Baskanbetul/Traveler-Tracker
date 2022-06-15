@@ -5,13 +5,13 @@
 // import './css/styles.css';
 
 // // An example of how you tell webpack to use an image (also need to link to it in the index.html)
-// import './images/turing-logo.png'
-
+import './images/pngegg.png'
 import './css/styles.css';
 import { fetchApiData, postApiData } from './apiCalls.js';
 import Traveler from '../src/traveler';
 import Trip from '../src/trip';
 import Destination from '../src/destination';
+import domUpdates from './domUpdates';
 // import travelerData from '../data/Traveler-data';
 
 // ** GLOBAL VARIABLES **
@@ -24,7 +24,6 @@ let travelerId;
 let date = new Date();
 let currentDay = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
 
-
 // ** QUERY SELECTORS **
 
 let clickSubmitButton = document.getElementById('submitFormBtn');
@@ -33,11 +32,15 @@ let selectDestination = document.getElementById('destinationDropdown');
 let selectTravelers = document.getElementById('planningNoTravelers');
 let planningNoDays = document.getElementById('planningNoDays');
 let estimatedCost = document.getElementById('planningCost');
+let userInput = document.getElementById('userInput')
+let passwordInput = document.getElementById('passwordInput');
+let clickLogInButton = document.getElementById('loginButton');
 
-let pastTripsView = document.querySelector('.past-trips-view');
 let upcomingTripsView = document.querySelector('.upcoming-trips-view');
 let pendingTripsView = document.querySelector('.pending-trips-view');
 let totalSpentInfo = document.querySelector('.total-spent-info');
+let pastTripsView = document.querySelector('.past-trips-view');
+
 
 
 // ** FUNCTIONS **
@@ -48,24 +51,49 @@ const getRandomID = (parameter) => {
 
 currentTraveler = getRandomID();
 
+const logIn = () => {
+	let userName = userInput.value.split('')
+	let id = userName.slice(8).join('');
+	let name = userName.slice(0, 8).join('')
+	
+	let password = passwordInput.value
+	if (userInput.value === '' || password === '' || password !== 'traveler') {
+		console.log("Please enter correct user name and password"); //LEAVE THIS CONSOLE LOG
+	} else {
+			travelerId = Number(id) 
+			domUpdates.hideLogInPage();
+			domUpdates.showAllTrips();
+			domUpdates.showDashboard();
+			getAllData();
+		}
+	}
+
+
+
+
+
+
+
+
 // ** FETCH REQUEST **
-
-const travelerPromise = fetchApiData('travelers');
-const tripPromise = fetchApiData('trips');
-const destinationPromise = fetchApiData('destinations');
-
-Promise.all([travelerPromise,tripPromise,destinationPromise])
-.then((value) => {
-	travelerId = getRandomID(value[0].travelers); //that line needs to be random number to make dynamic
-	travelersData = new Traveler(value[0].travelers[8]); //travelerId
-	tripData = new Trip(value[1].trips);
-	destinationData = new Destination(value[2].destinations);
-	travelersData.addMatchingTrips(tripData, destinationData);
-	showUserPastTrips();
-	showUserUpcomingTrips();
-	showUserPendingTrips();
-	showTotalSpentInfo();
-})
+const getAllData = () => {
+	const travelerPromise = fetchApiData('travelers');
+	const tripPromise = fetchApiData('trips');
+	const destinationPromise = fetchApiData('destinations');
+	
+	Promise.all([travelerPromise,tripPromise,destinationPromise])
+		.then((value) => {
+			let oneTraveler = value[0].travelers.find(traveler => traveler.id === travelerId)
+		travelersData = new Traveler(oneTraveler);
+		tripData = new Trip(value[1].trips);
+		destinationData = new Destination(value[2].destinations);
+		travelersData.addMatchingTrips(tripData, destinationData);
+		showUserPastTrips();
+		showUserUpcomingTrips();
+		showUserPendingTrips();
+		showTotalSpentInfo();
+	})
+}
 
 // ** POST REQUEST **
 
@@ -100,7 +128,6 @@ const planATrip = (event) => {
 		travelersData.trips = []
 		travelersData.pendingTrips =[]
 		travelersData.addMatchingTrips(tripData, destinationData)
-		// travelersData.getPendingTrips()
 		showUserPendingTrips();
 	});
 	getEstimatedCost(newTrip.duration, newTrip.travelers, newTrip.destinationID);
@@ -111,6 +138,7 @@ const planATrip = (event) => {
 const showUserPastTrips = () => {
 	travelersData.getPastTrips()
 	travelersData.pastTrips.forEach(trip => {
+		// domUpdates.displayUserPastTrip(trip);
 		pastTripsView.innerHTML += `
 		<img class="trip-view" src=${trip.destination.image}
 		<h5 class="trip-destination-name">Past Trips destination name: ${trip.destination.destination}</h5>
@@ -125,8 +153,6 @@ const showUserPastTrips = () => {
 		</div>
 		`;
 	})
-	
-	// travelersData.getPastTrips(currentDay);
 }
 
 const showUserUpcomingTrips = () => {
@@ -147,7 +173,6 @@ const showUserUpcomingTrips = () => {
 		</div>
 		`;
 	})
-	
 }
 
 const showUserPendingTrips = () => {
@@ -184,3 +209,4 @@ const getEstimatedCost = (duration, travelers, id) => {
 // ** EVENT LISTENER **
 
 clickSubmitButton.addEventListener('click', planATrip);
+clickLogInButton.addEventListener('click', logIn);
