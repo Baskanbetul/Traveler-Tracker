@@ -36,12 +36,13 @@
         <label for="passwordInput" class="login-label"><i class="fas fa-key"></i> Password</label>
       </section>
       <button type="button" class="login-button" id="loginButton">Login</button>
-      <p class="warnings" id="warnings"></p>
+      <p class="warnings hidden" id="warnings">Please enter correct user name and password</p>
     </form>
     <section class="dashboard-view hidden">
       <article class="grid-card">
         <div class="traveler-info-section-view" id="travelerInfoSectionView">
           <h2 id="travelerGreeting">Ready for new adventure!</h2>
+          <h2 id="networkError"></h2>
           <p class="welcome">Welcome Rachel!</p>
           <h3 id="totalSpentInfo" class="total-spent-info"></h3>
         </div>
@@ -51,7 +52,7 @@
           </section>
           <section class="form-fill">
             <p class="planning-text">Please select a destination and date for your new trip:</p>
-            <p class="post-error-field"></p>
+            <p class="post-error-field hidden"></p>
             <form class="planning-form" method="post">
               <div class="form-planning-inputs">
                 <div class="date-form-section">
@@ -70,7 +71,6 @@
                     <option>Madrid, Spain</option>
                     <option>Jakarta, Indonesia</option>
                     <option>Paris, France</option>
-                    <option>Tokyo, Japan</option>
                     <option>Amsterdam, Netherlands</option>
                     <option>Toronto, Canada</option>
                     <option>Mikonos, Greece</option>
@@ -80,7 +80,6 @@
                     <option>Manila, Philippines</option>
                     <option>Bangkok, Thailand</option>
                     <option>Jaipur, India</option>
-                    <option>Cape Town, South Africa</option>
                     <option>Quito, Ecuador</option>
                     <option>Miami, Florida</option>
                     <option>Tulum, Mexico</option>
@@ -126,7 +125,6 @@
                     placeholder="How many ?" aria-label="Number of Travelers" required></input>
                 </div>
                 <div class="planning-bottom">
-                  <p></p>
                   <button id="submitFormBtn" class="submit-form-btn" form="planning-form" type="button"
                     name="button">Submit</button>
                 </div>

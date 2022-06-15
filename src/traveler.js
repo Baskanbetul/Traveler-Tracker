@@ -1,5 +1,4 @@
 import destinationData from "../data/Destination-data";
-
 import tripData from "../data/Trip-data";
 
 class Traveler {
@@ -12,7 +11,7 @@ class Traveler {
 		this.upcomingTrips = [];
 		this.pendingTrips = [];
 	}
-	// TURN ON WHEN YOU RUN NPM START!!!
+	// USE WHEN YOU RUN NPM START!!!
 
 	addMatchingTrips(allTrips, allDestinations) {
 		let matchingDestinationTrip = [];
@@ -30,6 +29,8 @@ class Traveler {
 			}
 		});
 	}
+
+	// USE FOR TESTING - DATA ACCESS DIFFERENT
 
 	// addMatchingTrips(allTrips, allDestinations) {
 	// 	let matchingDestinationTrip = [];
@@ -53,8 +54,8 @@ class Traveler {
 	}
 
 	formatDate(day) {
-		var dd = String(day.getDate()).padStart(2, '0');
-		var mm = String(day.getMonth() + 1).padStart(2, '0');
+		var dd = String(day.getDate()).padStart(2, "0");
+		var mm = String(day.getMonth() + 1).padStart(2, "0");
 		var yyyy = day.getFullYear();
 		var formattedDay = yyyy + '/' + mm + '/' + dd;
 		return formattedDay;
@@ -86,7 +87,7 @@ class Traveler {
 
 	getPendingTrips() {
 		let pendingTrips = this.trips.filter((trip) => {
-			if (trip.status === 'pending') {
+			if (trip.status === "pending") {
 				return trip;
 			}
 		});
@@ -109,4 +110,3 @@ class Traveler {
 }
 
 export default Traveler;
-
