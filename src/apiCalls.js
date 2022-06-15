@@ -1,45 +1,45 @@
-// let errorMessage = 
+let networkError = document.getElementById('networkError');
+
 
 const fetchApiData = (url) => {
-	return fetch(`http://localhost:3001/api/v1/${url}`).then((promise) =>
-	// console.log(promise)
-	promise.json()
-	);
+	return fetch(`http://localhost:3001/api/v1/${url}`)
+		// .then((promise) => {
+		// 	if (!promise.ok) {
+		// 		networkError.innerHTML = 'Network error, Please try again!';
+		// 	} else {
+		// 		return promise.json()
+		// 	}
+		// })
+		.then(promise => promise.json())
+		.catch(error => {
+			networkError.innerHTML = 'Network error, Please try again!';
+			return error
+		})
 };
 
-
 const postApiData = (newTrip) => {
-	console.log(newTrip, "LABELLL12")
 	return fetch(`http://localhost:3001/api/v1/trips`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify(newTrip),
 	})
-		.then((response) => {
-		if (!response.ok) {
-		// console.log('Please fill in all inputs and try again.') {
-			return errorMessage.innerText = 'Please fill in all inputs and try again.'
-		} else {
-			return response.json()
-		}
-	})
-		.catch((error) => {
-			console.log("error")
-			// if (error.errorMessage === 'Failed to fetch') {
-			// 	errorMessage.innerText = 'Failed to fetch, start your server, please!';
-			// } else {
-			// 	errorMessage.innerText = errorMessage;
-			// }
-		});
+	// 	.then((response) => {
+	// 	if (!response.ok) {
+	// 		networkError.innerHTML = 'Network error, Please try again!';
+	// 	} else {
+	// 		return response.json()
+	// 	}
+	// })
+	// 	.catch((error) => {
+	// 		console.log(error)
+	// 		return error
+	// 	});
+	.then(response => response.json())
+		.catch(error => {
+			networkError.innerHTML = 'Network error, Please try again!';
+			return error
+		})
 
 };
-	
-// const functionForError = (response) => {
-// 	if (!response.ok) {
-// 		console.log('Please fill in all inputs and try again.')
-// 		// return errorMessage.innerText = 'Please fill in all inputs and try again.'
-// 	} else {
-// 		return response.json()
-// 	}
 
 export { fetchApiData, postApiData };
