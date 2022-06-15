@@ -85,7 +85,6 @@ class Traveler {
 	}
 
 	getPendingTrips() {
-		console.log(this.trips, "LABELELELELEL")
 		let pendingTrips = this.trips.filter((trip) => {
 			if (trip.status === 'pending') {
 				return trip;

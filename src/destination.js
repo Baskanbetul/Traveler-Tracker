@@ -12,7 +12,8 @@ class Destination {
 			return acc;
 		}, 0);
 		agentFee = expenseForTrip * 0.1;
-		return expenseForTrip + agentFee;
+		let total = expenseForTrip + agentFee
+		return total;
 	}
 
 	getCurrentYear() {

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,110 +15,133 @@
 </head>
 
 <body>
-  <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
-
-  <!-- Login page -->
-  <!-- <article class="login-form-container" id="loginFormContainer">
-      <form method="get" action="" class="login-form" id="loginForm">
-        <h1 class="login-header">Login</h1>
-        <section class="group">
-          <input type="text" class="login-input" id="userInput"><span class="bar"></span>
-          <label for="userInput" class="login-label"><i class="far fa-user"></i> Account</label>
-        </section>
-        <section class="group">
-          <input type="password" class="login-input" id="passwordInput"><span class="bar"></span>
-          <label for="passwordInput" class="login-label"><i class="fas fa-key"></i> Password</label>
-        </section>
-        <button type="submit" class="login-button" id="loginButton">Login</button>
-        <p class="warnings" id="warnings"></p>
-      </form>
-    </article> -->
-
-
-  <!-- <main class="traveler-dashboard-view hidden"> -->
-  <header>
-    <section class="agency-logo">
-      <!-- <img class="logo-img" src="./images/turing-logo.png" alt="turing logo"> -->
-      <h1>Travel Time</h1>
-    </section>
-    <section class="agency">
-      <p class="agency-slogan">"It is the traveler only who is foreign!"</p>
-    </section>
-  </header>
-  <nav>
-    <div class="grid-card">
-      <div class="traveler-info-section-view" id="travelerInfoSectionView">
-        <h2 id="travelerGreeting">Ready for new adventure!</h2>
-        <h3 id="totalSpentInfo" class="total-spent-info"></h3>
-        <!-- <section class="trips-views-btns">
-          <button type="button" id="pastTripBtn" class="past-trips-btn">Past Trips</button>
-          <button type="button" id="upcomingTripBtn" class="upcoming-trips-btn">Upcoming Trips</button>
-          <button type="button" id="pendingTripBtn" class="pending-trips-btn">Pending Trips</button>
-        </section> -->
-      </div>
-      <div class="trip-form-section">
-        <section class="form-instructions">
-          <h3 class="instructions-header-text">Plan a trip !</h3>
-        </section>
-        <section class="form-fill">
-          <p class="planning-text">Please select a destination and date for your new trip:</p>
-          <p class="post-error-field"></p>
-          <form class="planning-form" method="post">
-            <div class="form-planning-inputs">
-              <div class="date-form-section">
-                <label for="planningDate">Start Date</label>
-                <input id="planningDate" class="planning-date" type="date" name="start-date" value=""
-                  aria-label="Calendar" required>
-              </div>
-              <div class="destination-form-section">
-                <label for="destinationDropdown">Destination</label>
-                <select id="destinationDropdown" class="destination-dropdown" name="planning-destination"
-                  aria-label="Dropdown List">
-                  <option value="1" >Lima, Peru</option>
-                  <option value="2" >Stockholm, Sweden</option>
-                  <option value="3" >Sydney, Austrailia</option>
-                  <option value="4">Cartagena, Colombia</option>
-                  <option value="5" >Madrid, Spain</option>
-                </select>
-              </div>
-              <div class="days-form-section">
-                <label for="planningNoDays">Days</label>
-                <input type="number" id="planningNoDays" class="planning-no-days" name="planning-duration"
-                  placeholder="How many ?" aria-label="Number of days" required></input>
-              </div>
-              <div class="persons-form-section">
-                <label for="planningNoTravelers">Travelers</label>
-                <input type="number" id="planningNoTravelers" class="planning-no-travelers" name="planning-travelers"
-                  placeholder="How many ?" aria-label="Number of Travelers" required></input>
-              </div>
-              <div class="planning-bottom">
-                <p></p>
-                <button id="submitFormBtn" class="submit-form-btn" form="planning-form" type="button"
-                  name="button">Submit</button>
-              </div>
-            </div>
-          </form>
-          <h4 id="planningCost" class="planning-cost"></h4>
-        </section>
-      </div>
-    </div>
-  </nav>
-
-
   <main>
-    <div class="past-trips-view card">
-     
-    </div>
-
-      <div class="upcoming-trips-view card">
-        
-      </div>
-
-        <div class="pending-trips-view card">
-         
+    <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
+    <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
+    <header>
+      <img class="logo-img" src="./images/pngegg.png" alt="travel logo">
+      <h1>Travel Time</h1>
+      <section class="agency">
+        <p class="agency-slogan">"It is the traveler only who is foreign!"</p>
+      </section>
+    </header>
+    <form method="get" action="" class="login-form" id="loginForm">
+      <h2 class="login-header">Login</h2>
+      <section class="group">
+        <input type="text" name="username" class="login-input" id="userInput"><span class="bar"></span>
+        <label for="userInput" class="login-label"><i class="far fa-user"></i> Account</label>
+      </section>
+      <section class="group">
+        <input type="password" name ="password" class="login-input" id="passwordInput"><span class="bar"></span>
+        <label for="passwordInput" class="login-label"><i class="fas fa-key"></i> Password</label>
+      </section>
+      <button type="button" class="login-button" id="loginButton">Login</button>
+      <p class="warnings" id="warnings"></p>
+    </form>
+    <section class="dashboard-view hidden">
+      <article class="grid-card">
+        <div class="traveler-info-section-view" id="travelerInfoSectionView">
+          <h2 id="travelerGreeting">Ready for new adventure!</h2>
+          <p class="welcome">Welcome Rachel!</p>
+          <h3 id="totalSpentInfo" class="total-spent-info"></h3>
         </div>
-   
+        <article class="trip-form-section">
+          <section class="form-instructions">
+            <h3 class="instructions-header-text">Plan a trip !</h3>
+          </section>
+          <section class="form-fill">
+            <p class="planning-text">Please select a destination and date for your new trip:</p>
+            <p class="post-error-field"></p>
+            <form class="planning-form" method="post">
+              <div class="form-planning-inputs">
+                <div class="date-form-section">
+                  <label for="planningDate">Start Date</label>
+                  <input id="planningDate" class="planning-date" type="date" name="start-date" value=""
+                    aria-label="Calendar" required>
+                </div>
+                <form class="destination-form-section">
+                  <label for="destinationDropdown">Destination</label>
+                  <select id="destinationDropdown" class="destination-dropdown" name="planning-destination"
+                    aria-label="Dropdown List">
+                    <option>Lima, Peru</option>
+                    <option>Stockholm, Sweden</option>
+                    <option>Sydney, Austrailia</option>
+                    <option>Cartagena, Colombia</option>
+                    <option>Madrid, Spain</option>
+                    <option>Jakarta, Indonesia</option>
+                    <option>Paris, France</option>
+                    <option>Tokyo, Japan</option>
+                    <option>Amsterdam, Netherlands</option>
+                    <option>Toronto, Canada</option>
+                    <option>Mikonos, Greece</option>
+                    <option>Wellington, New Zealand</option>
+                    <option>St. Petersburg, Russia</option>
+                    <option>Marrakesh, Morocco</option>
+                    <option>Manila, Philippines</option>
+                    <option>Bangkok, Thailand</option>
+                    <option>Jaipur, India</option>
+                    <option>Cape Town, South Africa</option>
+                    <option>Quito, Ecuador</option>
+                    <option>Miami, Florida</option>
+                    <option>Tulum, Mexico</option>
+                    <option>Rome, Italy</option>
+                    <option>Copenhagen, Denmark</option>
+                    <option>Vilnius, Lithuania</option>
+                    <option>New York, New York</option>
+                    <option>London, England</option>
+                    <option>San Francisco, California</option>
+                    <option>San Juan, Puerto Rico</option>
+                    <option>Willemstad, Curaçao</option>
+                    <option>Antananarivo, Madagascar</option>
+                    <option>Colombo, Sri Lanka</option>
+                    <option>Kathmandu, Nepal</option>
+                    <option>Brussels, Belgium</option>
+                    <option>Seoul, South Korea</option>
+                    <option>Anchorage, Alaska</option>
+                    <option>Reykjavík, Iceland</option>
+                    <option>Frankfurt, Germany</option>
+                    <option>Helsinki, Finland</option>
+                    <option>Porto, Portugal</option>
+                    <option>La Isla Tortuga, Costa Rica</option>
+                    <option>Montego Bay, Jamaica</option>
+                    <option>Dominican Republic</option>
+                    <option>Nassau, The Bahamas</option>
+                    <option>Caye Caulker, Belize</option>
+                    <option>Calgary, Canada</option>
+                    <option>Victoria, Seychelles</option>
+                    <option>Zürich, Switzerland</option>
+                    <option>Dar es Salaam, Tanzania</option>
+                    <option>Castries, St Lucia</option>
+                    <optio>Hobart, Tasmania</option>
+                  </select>
+                </form>
+                <div class="days-form-section">
+                  <label for="planningNoDays">Days</label>
+                  <input type="number" id="planningNoDays" class="planning-no-days" name="planning-duration"
+                    placeholder="How many ?" aria-label="Number of days" required></input>
+                </div>
+                <div class="persons-form-section">
+                  <label for="planningNoTravelers">Travelers</label>
+                  <input type="number" id="planningNoTravelers" class="planning-no-travelers" name="planning-travelers"
+                    placeholder="How many ?" aria-label="Number of Travelers" required></input>
+                </div>
+                <div class="planning-bottom">
+                  <p></p>
+                  <button id="submitFormBtn" class="submit-form-btn" form="planning-form" type="button"
+                    name="button">Submit</button>
+                </div>
+              </div>
+            </form>
+            <h4 id="planningCost" class="planning-cost"></h4>
+          </section>
+        </article>
+      </article>
+    </section>
+    <section class="all-trips-view hidden">
+      <div class="past-trips-view card"></div>
+      <div class="upcoming-trips-view card"></div>
+      <div class="pending-trips-view card"> </div>
+    </section>
   </main>
   <script src="bundle.js"></script>
   <script src="https://kit.fontawesome.com/af04af5187.js" crossorigin="anonymous"></script>
