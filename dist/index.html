@@ -16,8 +16,6 @@
 
 <body>
   <main>
-    <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
-    <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
     <header>
       <img class="logo-img" src="./images/pngegg.png" alt="travel logo" tabindex="0">
       <h1 tabindex="0">Travel Time</h1>
@@ -25,7 +23,7 @@
         <p tabindex="0" class="agency-slogan">"It is the traveler only who is foreign!"</p>
       </section>
     </header>
-    <form method="get" action="" class="login-form hidden" id="loginForm">
+    <form method="get" action="" class="login-form" id="loginForm">
       <h2 class="login-header" tabindex="0">Login</h2>
       <section class="group">
         <input type="text" name="username" class="login-input" id="userInput"><span class="bar"></span>
@@ -38,11 +36,11 @@
       <button type="button" class="login-button" id="loginButton">Login</button>
       <p class="warnings hidden" id="warnings">Please enter correct user name and password</p>
     </form>
-    <section class="dashboard-view">
+    <section class="dashboard-view hidden">
       <article class="grid-card">
         <div class="traveler-info-section-view" id="travelerInfoSectionView">
           <h2 id="travelerGreeting" tabindex="0">Ready for new adventure!</h2>
-          <h2 class="error" id="networkError"></h2>
+          <h2 id="networkError"></h2>
           <p class="welcome" tabindex="0">Welcome Rachel!</p>
           <h3 id="totalSpentInfo" class="total-spent-info"></h3>
         </div>
@@ -130,12 +128,12 @@
                 </div>
               </div>
             </form>
-            <h4 id="planningCost" class="planning-cost error"></h4>
+            <h4 id="planningCost" class="planning-cost"></h4>
           </section>
         </article>
       </article>
     </section>
-    <section class="all-trips-view">
+    <section class="all-trips-view hidden">
       <div class="past-trips-view card" tabindex="0"></div>
       <div class="upcoming-trips-view card" tabindex="0"></div>
       <div class="pending-trips-view card" tabindex="0"> </div>

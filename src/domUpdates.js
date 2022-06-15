@@ -11,7 +11,6 @@ let estimatedCost = document.getElementById('planningCost');
 let welcome = document.querySelector('.welcome');
 let postErrorField = document.querySelector('.post-error-field');
 let logInWarning = document.getElementById('warnings');
-// let networkError = document.getElementById('networkError');
 
 let domUpdates = {
 	displayUserPastTrip(trip, destinationData) {
@@ -85,21 +84,6 @@ let domUpdates = {
   displayTravelerName(travelersData) {
     welcome.innerHTML = `Hi ${travelersData.name}, welcome back again. Let's gooo!`
   },
-
-  // displayNetworkError(response) {
-  //   if (!response.ok) {
-  //     domUpdates.removeHidden(networkError);
-  //     networkError.innerHTML = "Network error, Please try again!"
-	// 		// return error
-  //   } else {
-  //     domUpdates.addHidden(networkError);
-	// 		return response.json()
-	// 	}
-  // },
-
-  // hideNetworkError() {
-  //   domUpdates.addHidden(networkError);
-  // },
   
   displayPostError() {
     domUpdates.removeHidden(postErrorField);
